@@ -1,0 +1,7 @@
+No arquivo `src/services/auth.service.ts`, verifique se o método `signUp` cria o perfil na tabela `profiles`. Se não criar, o usuário pode ter problemas.
+
+No arquivo `src/pages/Simulado.tsx`, a mensagem de erro "Nenhuma categoria encontrada" agora deve desaparecer após rodar o script SQL.
+
+No arquivo `src/pages/SimuladoExecution.tsx`, já ajustamos para usar os campos `alternative_1`, `alternative_2`, `alternative_3`, `alternative_4` e `correct_index`.
+
+**Tudo pronto para testar!**
