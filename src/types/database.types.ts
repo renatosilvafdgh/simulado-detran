@@ -6,7 +6,7 @@ export type Json =
     | { [key: string]: Json | undefined }
     | Json[]
 
-export interface Database {
+export type Database = {
     public: {
         Tables: {
             profiles: {
@@ -94,7 +94,7 @@ export interface Database {
                 Row: {
                     id: string
                     created_at: string
-                    user_id: string
+                    user_id: string | null
                     category_name: string
                     status: string
                     score: number | null
@@ -105,7 +105,7 @@ export interface Database {
                 Insert: {
                     id?: string
                     created_at?: string
-                    user_id: string
+                    user_id?: string | null
                     category_name: string
                     status?: string
                     score?: number | null
@@ -116,7 +116,7 @@ export interface Database {
                 Update: {
                     id?: string
                     created_at?: string
-                    user_id?: string
+                    user_id?: string | null
                     category_name?: string
                     status?: string
                     score?: number | null
@@ -154,6 +154,65 @@ export interface Database {
                     time_spent?: number | null
                 }
             }
+            blog_posts: {
+                Row: {
+                    id: string
+                    created_at: string
+                    title: string
+                    slug: string
+                    content: string
+                    excerpt: string | null
+                    image_url: string | null
+                    category: string | null
+                    tags: string[] | null
+                    published: boolean
+                    published_at: string | null
+                    views: number
+                    author_id: string
+                }
+                Insert: {
+                    id?: string
+                    created_at?: string
+                    title: string
+                    slug: string
+                    content: string
+                    excerpt?: string | null
+                    image_url?: string | null
+                    category?: string | null
+                    tags?: string[] | null
+                    published?: boolean
+                    published_at?: string | null
+                    views?: number
+                    author_id: string
+                }
+                Update: {
+                    id?: string
+                    created_at?: string
+                    title?: string
+                    slug?: string
+                    content?: string
+                    excerpt?: string | null
+                    image_url?: string | null
+                    category?: string | null
+                    tags?: string[] | null
+                    published?: boolean
+                    published_at?: string | null
+                    views?: number
+                    author_id?: string
+                }
+            }
+        }
+        Views: {
+            [_ in never]: never
+        }
+        Functions: {
+            [_ in never]: never
+        }
+        Enums: {
+            [_ in never]: never
+        }
+        CompositeTypes: {
+            [_ in never]: never
         }
     }
 }

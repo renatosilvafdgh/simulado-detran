@@ -1,6 +1,13 @@
 import { supabase } from '@/lib/supabase';
 import type { User, Session, AuthError } from '@supabase/supabase-js';
 
+// Define explicit interface for User to avoid 'never' issues
+export interface AppUser extends User {
+    id: string;
+    email?: string;
+    full_name?: string;
+}
+
 export interface AuthResponse {
     user: User | null;
     session: Session | null;
@@ -23,11 +30,11 @@ export async function signUp(email: string, password: string, fullName?: string)
 
     // Create profile after signup
     if (data.user && !error) {
-        await supabase.from('profiles').insert({
+        await (supabase as any).from('profiles').insert({
             id: data.user.id,
             email: data.user.email!,
             full_name: fullName || null,
-        });
+        } as any);
     }
 
     return {
@@ -84,9 +91,9 @@ export async function updateProfile(userId: string, updates: {
     full_name?: string;
     avatar_url?: string;
 }) {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('profiles')
-        .update(updates)
+        .update(updates as any)
         .eq('id', userId)
         .select()
         .single();

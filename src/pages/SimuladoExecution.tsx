@@ -12,7 +12,7 @@ import {
     RotateCcw
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useAuth } from '@/hooks/useAuth';
+// import { useAuth } from '@/hooks/useAuth';
 import {
     getQuestionsByCategory,
     saveUserAnswer,
@@ -33,7 +33,7 @@ interface UserAnswer {
 export function SimuladoExecution() {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const { user } = useAuth();
+    // const { user } = useAuth(); // User not needed anymore
 
     const [simulado, setSimulado] = useState<Simulado | null>(null);
     const [questions, setQuestions] = useState<Question[]>([]);
@@ -56,7 +56,7 @@ export function SimuladoExecution() {
 
             try {
                 // Fetch simulado
-                const { data: simuladoData, error: simuladoError } = await supabase
+                const { data: simuladoData, error: simuladoError } = await (supabase as any)
                     .from('simulados')
                     .select('*')
                     .eq('id', id)
@@ -105,7 +105,7 @@ export function SimuladoExecution() {
         }
 
         loadSimulado();
-    }, [id, user, navigate]);
+    }, [id, navigate]);
 
     // Timer
     useEffect(() => {

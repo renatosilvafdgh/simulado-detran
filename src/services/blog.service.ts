@@ -8,7 +8,7 @@ type BlogPostInsert = Database['public']['Tables']['blog_posts']['Insert'];
  * Get all published blog posts
  */
 export async function getBlogPosts(limit?: number): Promise<{ data: BlogPost[] | null; error: any }> {
-    let query = supabase
+    let query = (supabase as any)
         .from('blog_posts')
         .select('*')
         .eq('published', true)
@@ -19,14 +19,14 @@ export async function getBlogPosts(limit?: number): Promise<{ data: BlogPost[] |
     }
 
     const { data, error } = await query;
-    return { data, error };
+    return { data: (data as BlogPost[]) || [], error };
 }
 
 /**
  * Get blog post by ID
  */
 export async function getBlogPostById(id: string): Promise<{ data: BlogPost | null; error: any }> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('blog_posts')
         .select('*')
         .eq('id', id)
@@ -34,9 +34,10 @@ export async function getBlogPostById(id: string): Promise<{ data: BlogPost | nu
 
     // Increment view count
     if (data && !error) {
-        await supabase
+        const post = data as BlogPost;
+        await (supabase as any)
             .from('blog_posts')
-            .update({ views: (data.views || 0) + 1 })
+            .update({ views: (post.views || 0) + 1 } as any)
             .eq('id', id);
     }
 
@@ -47,7 +48,7 @@ export async function getBlogPostById(id: string): Promise<{ data: BlogPost | nu
  * Get blog post by slug
  */
 export async function getBlogPostBySlug(slug: string): Promise<{ data: BlogPost | null; error: any }> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('blog_posts')
         .select('*')
         .eq('slug', slug)
@@ -56,10 +57,11 @@ export async function getBlogPostBySlug(slug: string): Promise<{ data: BlogPost 
 
     // Increment view count
     if (data && !error) {
-        await supabase
+        const post = data as BlogPost;
+        await (supabase as any)
             .from('blog_posts')
-            .update({ views: (data.views || 0) + 1 })
-            .eq('id', data.id);
+            .update({ views: (post.views || 0) + 1 } as any)
+            .eq('id', post.id);
     }
 
     return { data, error };
@@ -69,7 +71,7 @@ export async function getBlogPostBySlug(slug: string): Promise<{ data: BlogPost 
  * Get blog posts by category
  */
 export async function getBlogPostsByCategory(category: string): Promise<{ data: BlogPost[] | null; error: any }> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('blog_posts')
         .select('*')
         .eq('category', category)
@@ -83,7 +85,7 @@ export async function getBlogPostsByCategory(category: string): Promise<{ data: 
  * Get blog posts by tag
  */
 export async function getBlogPostsByTag(tag: string): Promise<{ data: BlogPost[] | null; error: any }> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('blog_posts')
         .select('*')
         .contains('tags', [tag])
@@ -97,7 +99,7 @@ export async function getBlogPostsByTag(tag: string): Promise<{ data: BlogPost[]
  * Search blog posts
  */
 export async function searchBlogPosts(query: string): Promise<{ data: BlogPost[] | null; error: any }> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('blog_posts')
         .select('*')
         .or(`title.ilike.%${query}%,content.ilike.%${query}%,excerpt.ilike.%${query}%`)
@@ -111,9 +113,9 @@ export async function searchBlogPosts(query: string): Promise<{ data: BlogPost[]
  * Create a new blog post (admin only)
  */
 export async function createBlogPost(post: BlogPostInsert): Promise<{ data: BlogPost | null; error: any }> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('blog_posts')
-        .insert(post)
+        .insert(post as any)
         .select()
         .single();
 

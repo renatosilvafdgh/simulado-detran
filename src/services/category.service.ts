@@ -7,7 +7,7 @@ type Category = Database['public']['Tables']['categories']['Row'];
  * Get all categories
  */
 export async function getCategories(): Promise<{ data: Category[] | null; error: any }> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('categories')
         .select('*')
         .order('name');
@@ -19,7 +19,7 @@ export async function getCategories(): Promise<{ data: Category[] | null; error:
  * Get category by ID
  */
 export async function getCategoryById(id: string): Promise<{ data: Category | null; error: any }> {
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
         .from('categories')
         .select('*')
         .eq('id', id)

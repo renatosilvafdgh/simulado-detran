@@ -15,13 +15,7 @@ import {
   Loader2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+// Select imports removed
 import { useAuth } from '@/hooks/useAuth';
 import { AuthModal } from '@/components/auth/AuthModal';
 import { getCategories } from '@/services/category.service';
@@ -96,7 +90,7 @@ export function Simulado() {
     'E': Container,
   };
 
-  const iniciarSimulado = async (tipo: 'RAPIDO' | 'COMPLETO', quantidade: number) => {
+  const iniciarSimulado = async (_tipo: 'RAPIDO' | 'COMPLETO', quantidade: number) => {
     if (!categoriaSelecionada) {
       alert('Selecione uma categoria primeiro');
       return;
@@ -123,8 +117,8 @@ export function Simulado() {
 
       // Create simulado session with category name
       const { data: simulado, error: simuladoError } = await createSimulado(
-        user?.id || null,
-        selectedCat.name, // Use category name
+        (user?.id || null) as string | null,
+        selectedCat.name,
         questions.length
       );
 
