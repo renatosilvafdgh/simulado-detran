@@ -12,7 +12,7 @@ interface NavbarProps {
 const navLinks = [
   { path: '/', label: 'Início', icon: Home },
   { path: '/simulado', label: 'Simulado', icon: GraduationCap },
-  { path: '/post', label: 'Blog', icon: BookOpen },
+  { label: 'Blog', path: '/blog', icon: BookOpen },
   { path: '/contato', label: 'Contato', icon: Mail },
 ];
 

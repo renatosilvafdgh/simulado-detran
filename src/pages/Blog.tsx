@@ -84,7 +84,7 @@ export function Blog() {
                   </div>
 
                   <h2 className="text-xl font-bold text-slate-900 dark:text-white mb-3 line-clamp-2">
-                    <Link to={`/post/${post.slug}`} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+                    <Link to={`/blog/${post.slug}`} className="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
                       {post.title}
                     </Link>
                   </h2>
@@ -100,7 +100,7 @@ export function Blog() {
                     </div>
 
                     <Link
-                      to={`/post/${post.slug}`}
+                      to={`/blog/${post.slug}`}
                       className="inline-flex items-center gap-1 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:gap-2 transition-all"
                     >
                       Ler mais <ArrowRight className="h-4 w-4" />

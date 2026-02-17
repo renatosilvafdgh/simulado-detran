@@ -24,8 +24,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/simulado" element={<Simulado />} />
               <Route path="/simulado/executar/:id" element={<SimuladoExecution />} />
-              <Route path="/post" element={<Blog />} />
-              <Route path="/post/:slug" element={<BlogPost />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contato" element={<Contato />} />
             </Routes>
           </main>
