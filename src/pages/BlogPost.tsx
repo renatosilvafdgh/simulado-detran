@@ -7,6 +7,7 @@ import { formatDate } from '@/lib/utils';
 import { Calendar, User, ArrowLeft, Loader2, Clock, Share } from 'lucide-react';
 import type { Database } from '@/types/database.types';
 import { Button } from '@/components/ui/button';
+import '@/styles/markdown.css';
 
 type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
 
@@ -105,7 +106,7 @@ export function BlogPost() {
                     </div>
                 </div>
 
-                <div className="p-8 md:p-12 prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4 prose-p:text-lg prose-p:leading-relaxed prose-a:text-emerald-600 dark:prose-a:text-emerald-400 prose-strong:text-slate-900 dark:prose-strong:text-white prose-table:border-collapse prose-th:border prose-th:border-slate-300 dark:prose-th:border-slate-600 prose-td:border prose-td:border-slate-300 dark:prose-td:border-slate-600 prose-th:bg-slate-100 dark:prose-th:bg-slate-800 prose-th:p-3 prose-td:p-3">
+                <div className="p-8 md:p-12 markdown-content">
                     <ReactMarkdown remarkPlugins={[remarkGfm]}>
                         {post.content}
                     </ReactMarkdown>

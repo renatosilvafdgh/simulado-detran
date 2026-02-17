@@ -1,0 +1,161 @@
+/* Markdown Blog Post Styles */
+
+/* Tables */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.markdown-content thead {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.markdown-content th {
+  padding: 1rem;
+  font-weight: 600;
+  text-align: left;
+  border: none;
+}
+
+.markdown-content td {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.markdown-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.markdown-content tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .markdown-content table {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .markdown-content td {
+    border-bottom: 1px solid #374151;
+  }
+  
+  .markdown-content tbody tr:hover {
+    background-color: #1f2937;
+  }
+}
+
+/* Headings */
+.markdown-content h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+.markdown-content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #10b981;
+  color: #111827;
+}
+
+.markdown-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #374151;
+}
+
+/* Paragraphs */
+.markdown-content p {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  color: #374151;
+}
+
+/* Links */
+.markdown-content a {
+  color: #10b981;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.markdown-content a:hover {
+  color: #059669;
+}
+
+/* Lists */
+.markdown-content ul,
+.markdown-content ol {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.markdown-content li {
+  margin-bottom: 0.75rem;
+  line-height: 1.7;
+}
+
+/* Strong */
+.markdown-content strong {
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Code */
+.markdown-content code {
+  background-color: #f3f4f6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  color: #dc2626;
+}
+
+.markdown-content pre {
+  background-color: #1f2937;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  color: #e5e7eb;
+  padding: 0;
+}
+
+/* Dark mode text colors */
+@media (prefers-color-scheme: dark) {
+  .markdown-content h1,
+  .markdown-content h2 {
+    color: #f9fafb;
+  }
+  
+  .markdown-content h3,
+  .markdown-content p {
+    color: #d1d5db;
+  }
+  
+  .markdown-content strong {
+    color: #f9fafb;
+  }
+  
+  .markdown-content code {
+    background-color: #374151;
+    color: #fca5a5;
+  }
+}
