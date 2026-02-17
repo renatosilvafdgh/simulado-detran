@@ -9,9 +9,9 @@ type BlogPostInsert = Database['public']['Tables']['blog_posts']['Insert'];
  */
 export async function getBlogPosts(limit?: number): Promise<{ data: BlogPost[] | null; error: any }> {
     let query = (supabase as any)
-        .from('blog_posts')
+        .from('posts')
         .select('*')
-        .eq('published', true)
+        // .eq('published', true) // 'posts' table might not have this column or it's not set
         .order('published_at', { ascending: false });
 
     if (limit) {
@@ -19,7 +19,29 @@ export async function getBlogPosts(limit?: number): Promise<{ data: BlogPost[] |
     }
 
     const { data, error } = await query;
-    return { data: (data as BlogPost[]) || [], error };
+
+    if (error) {
+        console.error('Error fetching blog posts:', error);
+        return { data: null, error };
+    }
+
+    const mappedData: BlogPost[] = ((data as any[]) || []).map(post => ({
+        id: post.id,
+        created_at: post.created_at,
+        title: post.title,
+        slug: post.slug,
+        content: post.content,
+        excerpt: post.meta_description,
+        image_url: post.og_image,
+        category: 'Notícias',
+        tags: post.hashtags ? post.hashtags.split(',').map((t: string) => t.trim()) : [],
+        published: true,
+        published_at: post.published_at,
+        views: 0,
+        author_id: post.author || 'system'
+    }));
+
+    return { data: mappedData, error: null };
 }
 
 /**
