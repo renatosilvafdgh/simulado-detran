@@ -17,7 +17,7 @@ export function Footer() {
               <span className="font-bold text-xl text-white">Simulado Brasil</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              A melhor plataforma de simulados para prova teórica do Detran. 
+              A melhor plataforma de simulados para prova teórica do Detran.
               Estude com questões atualizadas e passe na primeira tentativa.
             </p>
             <div className="flex items-center gap-3">
@@ -51,9 +51,9 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
+                <a href="/blog" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
                   Blog e Dicas
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/contato" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">

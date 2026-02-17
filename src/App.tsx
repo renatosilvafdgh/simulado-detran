@@ -4,8 +4,6 @@ import { Footer } from '@/components/layout/Footer';
 import { Home } from '@/pages/Home';
 import { Simulado } from '@/pages/Simulado';
 import { SimuladoExecution } from '@/pages/SimuladoExecution';
-import { Blog } from '@/pages/Blog';
-import { Artigo } from '@/pages/Artigo';
 import { Contato } from '@/pages/Contato';
 import { useTheme } from '@/hooks/useTheme';
 import { AuthProvider } from '@/contexts/AuthContext';
@@ -24,8 +22,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/simulado" element={<Simulado />} />
               <Route path="/simulado/executar/:id" element={<SimuladoExecution />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<Artigo />} />
               <Route path="/contato" element={<Contato />} />
             </Routes>
           </main>
