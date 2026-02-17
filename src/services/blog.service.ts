@@ -2,7 +2,6 @@ import { supabase } from '@/lib/supabase';
 import type { Database } from '@/types/database.types';
 
 type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
-type BlogPostInsert = Database['public']['Tables']['blog_posts']['Insert'];
 
 /**
  * Get all published blog posts
