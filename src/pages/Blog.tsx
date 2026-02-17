@@ -10,7 +10,6 @@ type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
 export function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadPosts() {
@@ -22,7 +21,6 @@ export function Blog() {
         }
       } catch (err: any) {
         console.error('Error loading blog posts:', err);
-        setError(err.message || 'Erro desconhecido');
       } finally {
         setLoading(false);
       }
