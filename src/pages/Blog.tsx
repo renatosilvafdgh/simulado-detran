@@ -10,16 +10,19 @@ type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
 export function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadPosts() {
       try {
-        const { data } = await getBlogPosts();
+        const { data, error: fetchError } = await getBlogPosts();
+        if (fetchError) throw fetchError;
         if (data) {
           setPosts(data);
         }
-      } catch (error) {
-        console.error('Error loading blog posts:', error);
+      } catch (err: any) {
+        console.error('Error loading blog posts:', err);
+        setError(err.message || 'Erro desconhecido');
       } finally {
         setLoading(false);
       }
@@ -31,7 +34,6 @@ export function Blog() {
   if (loading) {
     return (
       <div className="min-h-screen pt-24 pb-12 flex items-center justify-center">
-        {/* <Loader2 className="h-8 w-8 animate-spin text-emerald-600" /> */}
         <div className="text-emerald-600">Carregando...</div>
       </div>
     );
@@ -47,6 +49,12 @@ export function Blog() {
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Dicas, novidades e conteúdos exclusivos para te ajudar a conquistar sua habilitação.
           </p>
+          {/* Debug Info */}
+          <div className="mt-4 p-2 bg-slate-100 dark:bg-slate-800 rounded text-xs text-left">
+            <p>Debug Status:</p>
+            <p>Posts encontrados: {posts.length}</p>
+            {error && <p className="text-red-500">Erro: {error}</p>}
+          </div>
         </div>
 
         {posts.length === 0 ? (
