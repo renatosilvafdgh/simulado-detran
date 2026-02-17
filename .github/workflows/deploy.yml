@@ -29,4 +29,4 @@ jobs:
 
       - name: Deploy via lftp
         run: |
-          lftp -e "set ssl:verify-certificate no; open ${{ secrets.FTP_SERVER }}; user ${{ secrets.FTP_USERNAME }} ${{ secrets.FTP_PASSWORD }}; mirror --reverse --delete --verbose --exclude-glob .git* --exclude-glob blog/ --exclude-glob blog --exclude-glob */blog ./dist ./public_html; bye"
+          lftp -e "set ssl:verify-certificate no; open -p 21 ftp.souhabilitado.com; user u937054834.renatosilvafdgh ${{ secrets.FTP_PASSWORD }}; mirror --reverse --delete --verbose --exclude-glob .git* --exclude-glob blog/ --exclude-glob blog --exclude-glob */blog --exclude-glob public_html/blog/ ./dist ./public_html; bye"
