@@ -1,12 +1,14 @@
 <IfModule mod_rewrite.c>
+  # Permite acessar a pasta wordpress_blog sem interferência da SPA
   RewriteEngine On
   RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  
-  # Excluir pasta /blog (WordPress ou outra aplicação)
-  RewriteCond %{REQUEST_URI} !^/blog/
-  
+
+  # Se for wordpress_blog, não aplica a regra da SPA
+  RewriteCond %{REQUEST_URI} ^/wordpress_blog(/.*)?$ [NC]
+  RewriteRule ^ - [L]
+
+  # Todas as outras rotas vão para a SPA
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteRule ^.*$ /index.html [L,QSA]
 </IfModule>
