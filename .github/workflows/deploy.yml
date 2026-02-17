@@ -37,5 +37,8 @@ jobs:
             **/.git*/**
             **/node_modules/**
             public/blog/**
-            blog/**
             public_html/blog/**
+            blog
+            blog/**
+            ./blog
+            ./blog/**
