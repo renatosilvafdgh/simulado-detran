@@ -43,7 +43,7 @@ export function BlogPost() {
             <div className="min-h-screen pt-24 pb-12 flex flex-col items-center justify-center px-4">
                 <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-4">Post não encontrado</h1>
                 <p className="text-slate-600 dark:text-slate-400 mb-8">O artigo que você procura não existe ou foi removido.</p>
-                <Link to="/blog">
+                <Link to="/post">
                     <Button variant="outline" className="gap-2">
                         <ArrowLeft className="h-4 w-4" /> Voltar para o Blog
                     </Button>
@@ -113,7 +113,7 @@ export function BlogPost() {
                 </div>
 
                 <div className="p-8 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-700 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <Link to="/blog">
+                    <Link to="/post">
                         <Button variant="ghost" className="gap-2">
                             <ArrowLeft className="h-4 w-4" /> Voltar para lista
                         </Button>
