@@ -49,12 +49,6 @@ export function Blog() {
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Dicas, novidades e conteúdos exclusivos para te ajudar a conquistar sua habilitação.
           </p>
-          {/* Debug Info */}
-          <div className="mt-4 p-2 bg-slate-100 dark:bg-slate-800 rounded text-xs text-left">
-            <p>Debug Status:</p>
-            <p>Posts encontrados: {posts.length}</p>
-            {error && <p className="text-red-500">Erro: {error}</p>}
-          </div>
         </div>
 
         {posts.length === 0 ? (
