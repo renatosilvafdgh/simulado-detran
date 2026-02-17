@@ -1,14 +1,17 @@
 /* Markdown Blog Post Styles */
 
-/* Tables */
+/* Table Container for Mobile Scroll */
 .markdown-content table {
+  display: block;
   width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
   border-collapse: collapse;
   margin: 2rem 0;
   font-size: 0.95rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  overflow: hidden;
 }
 
 .markdown-content thead {
@@ -41,11 +44,11 @@
   .markdown-content table {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
-  
+
   .markdown-content td {
     border-bottom: 1px solid #374151;
   }
-  
+
   .markdown-content tbody tr:hover {
     background-color: #1f2937;
   }
@@ -140,20 +143,21 @@
 
 /* Dark mode text colors */
 @media (prefers-color-scheme: dark) {
+
   .markdown-content h1,
   .markdown-content h2 {
     color: #f9fafb;
   }
-  
+
   .markdown-content h3,
   .markdown-content p {
     color: #d1d5db;
   }
-  
+
   .markdown-content strong {
     color: #f9fafb;
   }
-  
+
   .markdown-content code {
     background-color: #374151;
     color: #fca5a5;
