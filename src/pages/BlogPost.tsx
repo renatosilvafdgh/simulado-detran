@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { getBlogPostBySlug } from '@/services/blog.service';
 import { formatDate } from '@/lib/utils';
 import { Calendar, User, ArrowLeft, Loader2, Clock, Share } from 'lucide-react';
@@ -103,13 +105,10 @@ export function BlogPost() {
                     </div>
                 </div>
 
-                <div className="p-8 md:p-12 prose prose-emerald dark:prose-invert max-w-none">
-                    {/* 
-              Note: Ideally we would use a Markdown renderer here like react-markdown. 
-              For now, assuming plain text or HTML content usage.
-              If content is HTML, use dangerouslySetInnerHTML safely. 
-            */}
-                    <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div className="p-8 md:p-12 prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-h1:text-4xl prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4 prose-p:text-lg prose-p:leading-relaxed prose-a:text-emerald-600 dark:prose-a:text-emerald-400 prose-strong:text-slate-900 dark:prose-strong:text-white prose-table:border-collapse prose-th:border prose-th:border-slate-300 dark:prose-th:border-slate-600 prose-td:border prose-td:border-slate-300 dark:prose-td:border-slate-600 prose-th:bg-slate-100 dark:prose-th:bg-slate-800 prose-th:p-3 prose-td:p-3">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {post.content}
+                    </ReactMarkdown>
                 </div>
 
                 <div className="p-8 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-100 dark:border-slate-700 flex flex-col md:flex-row items-center justify-between gap-4">
