@@ -1,5 +1,2 @@
-# Exceção para /blog
-/blog/*  /blog/:splat  200
-
 # Regra padrão SPA (tudo que não existe redireciona para index.html)
 /*  /index.html  200
