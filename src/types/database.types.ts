@@ -201,6 +201,47 @@ export type Database = {
                     author_id?: string
                 }
             }
+            posts: {
+                Row: {
+                    id: string
+                    created_at: string
+                    title: string
+                    slug: string
+                    content: string
+                    meta_title: string | null
+                    meta_description: string | null
+                    hashtags: string | null
+                    og_image: string | null
+                    published_at: string | null
+                    author: string | null
+                }
+                Insert: {
+                    id?: string
+                    created_at?: string
+                    title: string
+                    slug: string
+                    content: string
+                    meta_title?: string | null
+                    meta_description?: string | null
+                    hashtags?: string | null
+                    og_image?: string | null
+                    published_at?: string | null
+                    author?: string | null
+                }
+                Update: {
+                    id?: string
+                    created_at?: string
+                    title?: string
+                    slug?: string
+                    content?: string
+                    meta_title?: string | null
+                    meta_description?: string | null
+                    hashtags?: string | null
+                    og_image?: string | null
+                    published_at?: string | null
+                    author?: string | null
+                }
+            }
         }
         Views: {
             [_ in never]: never
