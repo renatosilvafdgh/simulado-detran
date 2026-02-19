@@ -50,7 +50,13 @@ export function Simulado() {
         if (data && !error) {
           console.log('Received Categories:', data.map(c => c.name));
           // Filter out 'Placas' category as requested
-          const filteredCategories = data.filter(c => !c.name.toLowerCase().includes('placa'));
+          // Enhanced filter to catch any variation
+          const filteredCategories = data.filter(c => {
+            const name = c.name.toLowerCase();
+            return !name.includes('placa') &&
+              !name.includes('caminho') &&
+              !name.includes('cor');
+          });
           console.log('Filtered Categories:', filteredCategories.map(c => c.name));
           setCategories(filteredCategories);
 
@@ -162,7 +168,7 @@ export function Simulado() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-            Escolha seu simulado
+            Escolha seu simulado (v2.0)
           </h1>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
             Selecione a categoria e o tipo de simulado que deseja fazer.

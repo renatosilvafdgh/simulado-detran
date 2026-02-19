@@ -68,7 +68,7 @@ export async function getQuestionsByCategory(
     // To get "random-ish", we can pick a random start ID.
     const randomStart = Math.floor(Math.random() * 140) + 1;
 
-    const { data: placasData, error: placasError } = await (publicSupabase as any)
+    const { data: placasData } = await (publicSupabase as any)
         .from('questions_placas_cores_e_caminhos')
         .select('*')
         .gte('id', randomStart)
