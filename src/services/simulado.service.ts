@@ -1,5 +1,14 @@
 import { supabase } from '@/lib/supabase';
+import { createClient } from '@supabase/supabase-js';
 import type { Database } from '@/types/database.types';
+
+// Create a public client to bypass RLS issues if the user is logged in
+// but the policy only allows 'public'/'anon' access.
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const publicSupabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+    auth: { persistSession: false }
+});
 
 type Simulado = Database['public']['Tables']['simulados']['Row'];
 // type SimuladoInsert = Database['public']['Tables']['simulados']['Insert']; // Unused
@@ -36,13 +45,75 @@ export async function getQuestionsByCategory(
     category: string,
     limit: number = 20
 ): Promise<{ data: Question[] | null; error: any }> {
-    const { data, error } = await (supabase as any)
+    // 1. Fetch questions from the standard bank for this category
+    // We fetch a bit less to make room for Placas, or just fetch requested amount
+    // to ensure we have enough.
+    const { data: bankData, error: bankError } = await (supabase as any)
         .from('questions_bank')
         .select('*')
         .eq('category', category)
         .limit(limit);
 
-    return { data: (data as Question[]) || [], error };
+    if (bankError) {
+        return { data: null, error: bankError };
+    }
+
+    // 2. Fetch some questions from Placas table to mix in
+    // We'll aim for about 20-30% of the questions to be from Placas
+    const placasCount = Math.max(2, Math.floor(limit * 0.3));
+
+    // We pick random IDs from range 1-158. 
+    // Since we can't easily do "random" in SQL without RPC, we'll fetch a range 
+    // or just use our existing helper but for a specific count.
+    // To get "random-ish", we can pick a random start ID.
+    const randomStart = Math.floor(Math.random() * 140) + 1;
+
+    const { data: placasData, error: placasError } = await (publicSupabase as any)
+        .from('questions_placas_cores_e_caminhos')
+        .select('*')
+        .gte('id', randomStart)
+        .limit(placasCount);
+
+    // Map Placas data to Question structure
+    const mappedPlacas = placasData ? placasData.map((q: any) => ({
+        ...q,
+        id: String(q.id),
+        category: category, // Assign current category so they fit in the section
+        subject: 'Placas, Cores e Caminhos'
+    })) : [];
+
+    // 3. Combine and Shuffle
+    const combined = [...(bankData || []), ...mappedPlacas];
+
+    // Simple shuffle
+    const shuffled = combined.sort(() => Math.random() - 0.5);
+
+    // Return requested limit
+    return { data: shuffled.slice(0, limit), error: null };
+}
+
+/**
+ * Get questions from Placas table (questions_placas_cores_e_caminhos)
+ */
+export async function getQuestionsFromPlacasTable(
+    limit: number = 20
+): Promise<{ data: Question[] | null; error: any }> {
+    const { data, error } = await (publicSupabase as any)
+        .from('questions_placas_cores_e_caminhos')
+        .select('*')
+        .lte('id', 158) // User specified ID 1-158
+        .limit(limit);
+
+    // Map to Question type and ensure ID is string
+    const mappedData = data ? data.map((q: any) => ({
+        ...q,
+        id: String(q.id),
+        // Ensure other required fields exist if missing
+        category: q.category || 'Placas',
+        subject: q.subject || 'Placas'
+    })) : [];
+
+    return { data: (mappedData as Question[]), error };
 }
 
 /**

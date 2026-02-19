@@ -1,0 +1,9 @@
+--- FINAL VERIFICATION ---
+[R-14]: https://uebewihyttehjdzazsku.supabase.co/storage/v1/object/public/imagem-placas/Regulamentacao/R-14.png
+
+Sample of populated rows:
+[A-5a]: https://uebewihyttehjdzazsku.supabase.co/storage/v1/object/public/imagem-placas/Advertencia/A-5a.png
+[A-7a]: https://uebewihyttehjdzazsku.supabase.co/storage/v1/object/public/imagem-placas/Advertencia/A-7a.png
+[A-9]: https://uebewihyttehjdzazsku.supabase.co/storage/v1/object/public/imagem-placas/Advertencia/A-9.png
+[A-11a]: https://uebewihyttehjdzazsku.supabase.co/storage/v1/object/public/imagem-placas/Advertencia/A-11a.png
+[A-12]: https://uebewihyttehjdzazsku.supabase.co/storage/v1/object/public/imagem-placas/Advertencia/A-12.png

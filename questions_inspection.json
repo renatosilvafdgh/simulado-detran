@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "alternative_1": "R-1 - Parada obrigatória",
+    "alternative_2": "R-2 - Dê a preferência",
+    "alternative_3": "R-6a - Proibido estacionar",
+    "alternative_4": "R-15 - Altura máxima permitida"
+  },
+  {
+    "id": 2,
+    "alternative_1": "R-1 - Parada obrigatória",
+    "alternative_2": "R-2 - Dê a preferência",
+    "alternative_3": "R-3 - Sentido proibido",
+    "alternative_4": "R-24a - Sentido de circulação da via"
+  },
+  {
+    "id": 3,
+    "alternative_1": "R-1 - Parada obrigatória",
+    "alternative_2": "R-2 - Dê a preferência",
+    "alternative_3": "R-3 - Sentido proibido",
+    "alternative_4": "R-26 - Siga em frente"
+  },
+  {
+    "id": 4,
+    "alternative_1": "R-4a - Proibido virar à esquerda",
+    "alternative_2": "R-4b - Proibido virar à direita",
+    "alternative_3": "R-5a - Proibido retornar à esquerda",
+    "alternative_4": "R-25a - Vire à esquerda"
+  },
+  {
+    "id": 5,
+    "alternative_1": "R-4a - Proibido virar à esquerda",
+    "alternative_2": "R-4b - Proibido virar à direita",
+    "alternative_3": "R-5b - Proibido retornar à direita",
+    "alternative_4": "R-25b - Vire à direita"
+  }
+]

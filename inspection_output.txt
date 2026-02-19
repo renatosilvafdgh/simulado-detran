@@ -1,0 +1,14 @@
+--- START INSPECTION ---
+
+Fetching from table: placas
+Successfully fetched 5 rows.
+Sample Row: {
+  "Código": "A-1a",
+  "Descrição": "Curva acentuada à esquerda",
+  "Link_imagem_placa": null
+}
+
+Listing files from bucket: imagem-placas
+Successfully listed 0 files.
+Bucket is empty or RLS is hiding files.
+--- END INSPECTION ---

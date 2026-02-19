@@ -1,0 +1,13 @@
+INSERT INTO posts (
+  title,
+  slug,
+  content,
+  meta_title,
+  meta_description,
+  hashtags,
+  published_at,
+  author
+)
+VALUES (
+  'CNH do Brasil 2026: Guia Definitivo para Economizar 80% e Tirar sua Habilitação',
+  'cnh-do-brasil-2026-guia-definitivo',

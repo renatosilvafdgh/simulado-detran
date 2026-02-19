@@ -48,9 +48,14 @@ export function Simulado() {
       try {
         const { data, error } = await getCategories();
         if (data && !error) {
-          setCategories(data);
-          if (data.length > 0) {
-            setCategoriaSelecionada(data[0].id);
+          console.log('Received Categories:', data.map(c => c.name));
+          // Filter out 'Placas' category as requested
+          const filteredCategories = data.filter(c => !c.name.toLowerCase().includes('placa'));
+          console.log('Filtered Categories:', filteredCategories.map(c => c.name));
+          setCategories(filteredCategories);
+
+          if (filteredCategories.length > 0) {
+            setCategoriaSelecionada(filteredCategories[0].id);
           }
         }
       } catch (err) {
@@ -104,10 +109,14 @@ export function Simulado() {
 
     try {
       // Fetch questions from Supabase using category name (A, B, C, D, E)
-      const { data: questions, error: questionsError } = await getQuestionsByCategory(
-        selectedCat.name, // Use category name (A, B, C, D, E) not ID
+      // Now always uses getQuestionsByCategory which internally mixes in Placas questions
+      const res = await getQuestionsByCategory(
+        selectedCat.name,
         quantidade
       );
+
+      const questions = res.data;
+      const questionsError = res.error;
 
       if (questionsError || !questions || questions.length === 0) {
         alert('Não há questões disponíveis para esta categoria. Por favor, adicione questões no banco de dados.');

@@ -1,0 +1,7 @@
+,
+  'Tirar CNH em 2026: Economize 80% com o App CNH do Brasil',
+  'Reduza os custos da CNH em 80%! Aprenda a usar o App CNH do Brasil, faça o curso teórico gratuito e garanta sua independência. Comece agora sua jornada!',
+  '#CNH2026, #CNHdoBrasil, #MobilidadeUrbana, #EconomiaCidada, #HabilitacaoDigital',
+  NOW(),
+  auth.uid()
+);

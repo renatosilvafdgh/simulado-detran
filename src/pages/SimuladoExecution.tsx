@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 // import { useAuth } from '@/hooks/useAuth';
 import {
     getQuestionsByCategory,
+    getQuestionsFromPlacasTable,
     saveUserAnswer,
     completeSimulado
 } from '@/services/simulado.service';
@@ -82,11 +83,25 @@ export function SimuladoExecution() {
                     return;
                 }
 
-                // Fetch questions using category name
-                const { data: questionsData, error: questionsError } = await getQuestionsByCategory(
-                    simuladoData.category_name,
-                    simuladoData.total_questions
-                );
+                // Fetch questions
+                let questionsData, questionsError;
+
+                // Check if this is a "Placas" related simulado
+                // We check for "placa" (case insensitive) or if the default fetch fails, we might fallback?
+                // For now, let's prioritize the new table if the category *name* matches likely candidates.
+                // Or since the user said "questions with id 1 to 158", maybe it's the "Placas" category.
+                if (simuladoData.category_name && simuladoData.category_name.toLowerCase().includes('placa')) {
+                    const res = await getQuestionsFromPlacasTable(simuladoData.total_questions);
+                    questionsData = res.data;
+                    questionsError = res.error;
+                } else {
+                    const res = await getQuestionsByCategory(
+                        simuladoData.category_name,
+                        simuladoData.total_questions
+                    );
+                    questionsData = res.data;
+                    questionsError = res.error;
+                }
 
                 if (questionsError || !questionsData || questionsData.length === 0) {
                     alert('Erro ao carregar questões');
@@ -350,7 +365,15 @@ export function SimuladoExecution() {
                                             ? 'text-emerald-900 dark:text-emerald-100 font-medium'
                                             : 'text-slate-700 dark:text-slate-300'
                                             }`}>
-                                            {alternative}
+                                            {alternative.startsWith('http') ? (
+                                                <img
+                                                    src={alternative}
+                                                    alt={`Opção ${optionNumber}`}
+                                                    className="h-24 object-contain max-w-full"
+                                                />
+                                            ) : (
+                                                alternative
+                                            )}
                                         </span>
                                         {isSelected && (
                                             <CheckCircle className="h-6 w-6 text-emerald-500 flex-shrink-0" />

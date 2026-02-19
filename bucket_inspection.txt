@@ -1,0 +1,4 @@
+--- START BUCKET INSPECTION ---
+Successfully listed 0 buckets.
+No buckets found. (RLS might be blocking listing)
+--- END BUCKET INSPECTION ---
