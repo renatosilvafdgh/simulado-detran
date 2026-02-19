@@ -46,6 +46,7 @@ export function SimuladoExecution() {
     const [completed, setCompleted] = useState(false);
     const [timeElapsed, setTimeElapsed] = useState(0);
     const [result, setResult] = useState<{ score: number; correct: number; total: number } | null>(null);
+    const [showFeedback, setShowFeedback] = useState(false);
 
     // Load simulado and questions
     useEffect(() => {
@@ -140,57 +141,77 @@ export function SimuladoExecution() {
     };
 
     const handleAnswerSelect = (answerIndex: number) => {
-        setSelectedAnswer(answerIndex);
+        if (!showFeedback && !submitting) {
+            setSelectedAnswer(answerIndex);
+        }
     };
 
-    const handleNextQuestion = async () => {
+    const handleAction = async () => {
         if (selectedAnswer === null || !simulado) return;
 
-        const currentQuestion = questions[currentQuestionIndex];
-        const isCorrect = selectedAnswer === currentQuestion.correct_index;
+        // If feedback is NOT shown yet, we are "submitting/answering" the current question
+        if (!showFeedback) {
+            const currentQuestion = questions[currentQuestionIndex];
+            const isCorrect = selectedAnswer === currentQuestion.correct_index;
 
-        setSubmitting(true);
+            setSubmitting(true);
 
-        try {
-            // Save answer to database
-            await saveUserAnswer(
-                simulado.id,
-                currentQuestion.id,
-                selectedAnswer,
-                currentQuestion.correct_index,
-                timeElapsed
-            );
+            try {
+                // Save answer to database (fire and forget generally, or await if critical)
+                // We await to ensure partial progress is saved
+                await saveUserAnswer(
+                    simulado.id,
+                    currentQuestion.id,
+                    selectedAnswer,
+                    currentQuestion.correct_index,
+                    timeElapsed
+                );
 
-            // Store answer locally
-            setUserAnswers([...userAnswers, {
-                questionId: currentQuestion.id,
-                answer: selectedAnswer,
-                isCorrect
-            }]);
+                // Store answer locally
+                setUserAnswers([...userAnswers, {
+                    questionId: currentQuestion.id,
+                    answer: selectedAnswer,
+                    isCorrect
+                }]);
 
-            // Move to next question or finish
+                // SHOW FEEDBACK
+                setShowFeedback(true);
+            } catch (err) {
+                console.error('Erro ao salvar resposta:', err);
+                alert('Erro ao salvar resposta. Tente novamente.');
+            } finally {
+                setSubmitting(false);
+            }
+        }
+        // If feedback IS shown, we are moving to "Next" question
+        else {
             if (currentQuestionIndex < questions.length - 1) {
                 setCurrentQuestionIndex(currentQuestionIndex + 1);
                 setSelectedAnswer(null);
+                setShowFeedback(false);
             } else {
                 await finishSimulado();
             }
-        } catch (err) {
-            console.error('Erro ao salvar resposta:', err);
-            alert('Erro ao salvar resposta. Tente novamente.');
-        } finally {
-            setSubmitting(false);
         }
     };
 
     const handlePreviousQuestion = () => {
-        if (currentQuestionIndex > 0) {
-            setCurrentQuestionIndex(currentQuestionIndex - 1);
-            const previousAnswer = userAnswers[currentQuestionIndex - 1];
-            if (previousAnswer) {
-                setSelectedAnswer(previousAnswer.answer);
+        if (currentQuestionIndex > 0 && !submitting) {
+            // Logic for going back is tricky with immediate feedback because we've already "answered".
+            // If we go back, we should probably show the state as "answered" (feedback visible).
+            // For now, simple implementation: Go back, populate user's answer, show feedback.
+
+            const prevIndex = currentQuestionIndex - 1;
+            const prevAnswer = userAnswers.find(a => a.questionId === questions[prevIndex].id);
+
+            setCurrentQuestionIndex(prevIndex);
+
+            if (prevAnswer) {
+                setSelectedAnswer(prevAnswer.answer);
+                setShowFeedback(true); // Always show feedback for answered questions
             } else {
                 setSelectedAnswer(null);
+                setShowFeedback(false);
             }
         }
     };
@@ -299,6 +320,7 @@ export function SimuladoExecution() {
 
     const currentQuestion = questions[currentQuestionIndex];
     const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const isAnswerCorrect = selectedAnswer === currentQuestion.correct_index;
 
     // Get alternatives as array
     const alternatives = [
@@ -342,29 +364,56 @@ export function SimuladoExecution() {
 
                     <div className="space-y-4 mb-8">
                         {alternatives.map((alternative, index) => {
-                            const isSelected = selectedAnswer === (index + 1);
                             const optionNumber = index + 1;
+                            const isSelected = selectedAnswer === optionNumber;
+                            const isCorrectOption = currentQuestion.correct_index === optionNumber;
+
+                            // Determine style based on feedback state
+                            let borderClass = 'border-slate-200 dark:border-slate-700';
+                            let bgClass = '';
+                            let textClass = 'text-slate-700 dark:text-slate-300';
+                            let icon = null;
+
+                            if (showFeedback) {
+                                if (isCorrectOption) {
+                                    borderClass = 'border-emerald-500';
+                                    bgClass = 'bg-emerald-50 dark:bg-emerald-900/20';
+                                    textClass = 'text-emerald-900 dark:text-emerald-100 font-medium';
+                                    icon = <CheckCircle className="h-6 w-6 text-emerald-500 flex-shrink-0" />;
+                                } else if (isSelected && !isCorrectOption) {
+                                    borderClass = 'border-red-500';
+                                    bgClass = 'bg-red-50 dark:bg-red-900/20';
+                                    textClass = 'text-red-900 dark:text-red-100 font-medium';
+                                    icon = <XCircle className="h-6 w-6 text-red-500 flex-shrink-0" />;
+                                } else {
+                                    // Not selected and not correct - dimmed
+                                    bgClass = 'opacity-50';
+                                }
+                            } else if (isSelected) {
+                                borderClass = 'border-emerald-500';
+                                bgClass = 'bg-emerald-50 dark:bg-emerald-900/20';
+                                textClass = 'text-emerald-900 dark:text-emerald-100 font-medium';
+                                icon = <CheckCircle className="h-6 w-6 text-emerald-500 flex-shrink-0 opacity-50" />;
+                            } else {
+                                // Default hover state
+                                borderClass = 'border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors';
+                            }
 
                             return (
                                 <button
                                     key={index}
                                     onClick={() => handleAnswerSelect(optionNumber)}
-                                    className={`w-full text-left p-4 rounded-xl border-2 transition-all ${isSelected
-                                        ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
-                                        : 'border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-700'
-                                        }`}
+                                    disabled={showFeedback}
+                                    className={`w-full text-left p-4 rounded-xl border-2 transition-all ${borderClass} ${bgClass}`}
                                 >
                                     <div className="flex items-start gap-3">
-                                        <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center font-semibold ${isSelected
-                                            ? 'bg-emerald-500 text-white'
-                                            : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
+                                        <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center font-semibold ${showFeedback
+                                                ? (isCorrectOption ? 'bg-emerald-500 text-white' : (isSelected ? 'bg-red-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-400'))
+                                                : (isSelected ? 'bg-emerald-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400')
                                             }`}>
                                             {optionNumber}
                                         </div>
-                                        <span className={`flex-1 ${isSelected
-                                            ? 'text-emerald-900 dark:text-emerald-100 font-medium'
-                                            : 'text-slate-700 dark:text-slate-300'
-                                            }`}>
+                                        <span className={`flex-1 ${textClass}`}>
                                             {alternative.startsWith('http') ? (
                                                 <img
                                                     src={alternative}
@@ -375,20 +424,35 @@ export function SimuladoExecution() {
                                                 alternative
                                             )}
                                         </span>
-                                        {isSelected && (
-                                            <CheckCircle className="h-6 w-6 text-emerald-500 flex-shrink-0" />
-                                        )}
+                                        {icon}
                                     </div>
                                 </button>
                             );
                         })}
                     </div>
 
+                    {/* Feedback / Explanation Section */}
+                    {showFeedback && (
+                        <div className={`mb-8 p-4 rounded-xl border-l-4 ${isAnswerCorrect ? 'bg-emerald-50 border-emerald-500 dark:bg-emerald-900/10' : 'bg-red-50 border-red-500 dark:bg-red-900/10'}`}>
+                            <h3 className={`font-semibold mb-2 ${isAnswerCorrect ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400'}`}>
+                                {isAnswerCorrect ? 'Resposta Correta!' : 'Resposta Incorreta'}
+                            </h3>
+                            {currentQuestion.explanation && (
+                                <p className="text-slate-600 dark:text-slate-300">
+                                    {currentQuestion.explanation}
+                                </p>
+                            )}
+                            {!currentQuestion.explanation && (
+                                <p className="text-slate-500 italic">Sem explicação disponível.</p>
+                            )}
+                        </div>
+                    )}
+
                     {/* Navigation */}
                     <div className="flex items-center justify-between">
                         <Button
                             onClick={handlePreviousQuestion}
-                            disabled={currentQuestionIndex === 0}
+                            disabled={currentQuestionIndex === 0 || submitting} // Disable previous during submission
                             variant="outline"
                             className="flex items-center gap-2"
                         >
@@ -397,23 +461,31 @@ export function SimuladoExecution() {
                         </Button>
 
                         <Button
-                            onClick={handleNextQuestion}
+                            onClick={handleAction}
                             disabled={selectedAnswer === null || submitting}
-                            className="flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-600"
+                            className={`flex items-center gap-2 text-white ${!showFeedback
+                                    ? 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700'
+                                    : 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700'
+                                }`}
                         >
                             {submitting ? (
                                 <>
                                     <Loader2 className="h-4 w-4 animate-spin" />
-                                    Salvando...
+                                    Processando...
+                                </>
+                            ) : !showFeedback ? (
+                                <>
+                                    Responder
+                                    <CheckCircle className="h-4 w-4" />
                                 </>
                             ) : currentQuestionIndex === questions.length - 1 ? (
                                 <>
-                                    Finalizar
-                                    <CheckCircle className="h-4 w-4" />
+                                    Finalizar Simulado
+                                    <Trophy className="h-4 w-4" />
                                 </>
                             ) : (
                                 <>
-                                    Próxima
+                                    Próxima Questão
                                     <ArrowRight className="h-4 w-4" />
                                 </>
                             )}

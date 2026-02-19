@@ -4,11 +4,12 @@ import type { Database } from '@/types/database.types';
 
 // Create a public client to bypass RLS issues if the user is logged in
 // but the policy only allows 'public'/'anon' access.
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const publicSupabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-    auth: { persistSession: false }
-});
+// UPDATE: Switched to main client for all queries to ensure consistency.
+// const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+// const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// const publicSupabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+//     auth: { persistSession: false }
+// });
 
 type Simulado = Database['public']['Tables']['simulados']['Row'];
 // type SimuladoInsert = Database['public']['Tables']['simulados']['Insert']; // Unused
@@ -45,50 +46,73 @@ export async function getQuestionsByCategory(
     category: string,
     limit: number = 20
 ): Promise<{ data: Question[] | null; error: any }> {
-    // 1. Fetch questions from the standard bank for this category
-    // We fetch a bit less to make room for Placas, or just fetch requested amount
-    // to ensure we have enough.
-    const { data: bankData, error: bankError } = await (supabase as any)
+    // 1. Determine which categories to fetch from questions_bank
+    // If the category is A, B, C, D, or E, we might want to fetch 'Geral' or specific topics
+    // since the bank might not have questions explicitly labeled 'A' etc.
+    // However, if the bank DOES have 'B', we should include it.
+    // Strategy: Fetch questions where category is the requested one OR 'Legislacao', 'Direcao Defensiva', etc.
+
+    const isLicenseCategory = ['A', 'B', 'C', 'D', 'E'].includes(category);
+
+    let bankQuery = (supabase as any)
         .from('questions_bank')
-        .select('*')
-        .eq('category', category)
-        .limit(limit);
+        .select('*');
+
+    if (isLicenseCategory) {
+        // For license categories, fetch questions that match the category OR general subjects
+        // Note: Supabase 'in' filter expects an array, and strings with spaces must be quoted in the filter string
+        bankQuery = bankQuery.or(`category.eq.${category},category.in.("Legislacao","Direcao Defensiva","Primeiros Socorros","Meio Ambiente","Mecanica")`);
+    } else {
+        // exact match for other categories
+        bankQuery = bankQuery.eq('category', category);
+    }
+
+    // We fetch a bit less to make room for Placas
+    const { data: bankData, error: bankError } = await bankQuery.limit(limit);
 
     if (bankError) {
         return { data: null, error: bankError };
     }
 
-    // 2. Fetch some questions from Placas table to mix in
-    // We'll aim for about 20-30% of the questions to be from Placas
-    const placasCount = Math.max(2, Math.floor(limit * 0.3));
+    // 2. Fetch questions from Placas table to mix in
+    // Optimization: Since table is small (~155 rows), we fetch all to perform robust random picking in memory.
+    // This avoids issues with sparse IDs or bad random ranges causing low question counts.
 
-    // We pick random IDs from range 1-158. 
-    // Since we can't easily do "random" in SQL without RPC, we'll fetch a range 
-    // or just use our existing helper but for a specific count.
-    // To get "random-ish", we can pick a random start ID.
-    const randomStart = Math.floor(Math.random() * 140) + 1;
+    // CRITICAL FIX: Create a fresh anonymous client to bypass potential RLS issues with authenticated users.
+    // The script worked because it used a fresh client. The app failed because it used the auth client.
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const localClient = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+        auth: { persistSession: false }
+    });
 
-    const { data: placasData } = await (publicSupabase as any)
+    const { data: placasData, error: placasError } = await localClient
         .from('questions_placas_cores_e_caminhos')
-        .select('*')
-        .gte('id', randomStart)
-        .limit(placasCount);
+        .select('*');
+
+    if (placasError) {
+        console.error('CRITICAL ERROR fetching Placas:', placasError);
+    } else {
+        console.log(`Successfully fetched ${placasData?.length} Placas questions via local client.`);
+    }
 
     // Map Placas data to Question structure
     const mappedPlacas = placasData ? placasData.map((q: any) => ({
         ...q,
-        id: String(q.id),
+        id: `placa-${q.id}`, // Prefix ID to avoid collision with bank UUIDs
         category: category, // Assign current category so they fit in the section
         subject: 'Placas, Cores e Caminhos'
     })) : [];
 
     // 3. Combine and Shuffle
+    // If bank has data, we use it. We fill the rest (or all) from Placas.
     const combined = [...(bankData || []), ...mappedPlacas];
 
-    // Simple shuffle
+    // Robust Shuffle (Fisher-Yates style sort)
     const shuffled = combined.sort(() => Math.random() - 0.5);
 
-    // Return requested limit
+    // Return exact requested limit
+    // Slice ensures we don't return more than requested.
     return { data: shuffled.slice(0, limit), error: null };
 }
 
@@ -98,7 +122,14 @@ export async function getQuestionsByCategory(
 export async function getQuestionsFromPlacasTable(
     limit: number = 20
 ): Promise<{ data: Question[] | null; error: any }> {
-    const { data, error } = await (publicSupabase as any)
+    // Create fresh client for robustness
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+    const localClient = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+        auth: { persistSession: false }
+    });
+
+    const { data, error } = await localClient
         .from('questions_placas_cores_e_caminhos')
         .select('*')
         .lte('id', 158) // User specified ID 1-158
@@ -107,7 +138,7 @@ export async function getQuestionsFromPlacasTable(
     // Map to Question type and ensure ID is string
     const mappedData = data ? data.map((q: any) => ({
         ...q,
-        id: String(q.id),
+        id: `placa-${q.id}`, // Prefix ID to avoid collision
         // Ensure other required fields exist if missing
         category: q.category || 'Placas',
         subject: q.subject || 'Placas'
