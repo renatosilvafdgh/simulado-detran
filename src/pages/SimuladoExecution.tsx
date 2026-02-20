@@ -319,8 +319,12 @@ export function SimuladoExecution() {
     }
 
     const currentQuestion = questions[currentQuestionIndex];
-    const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const questionProgress = ((currentQuestionIndex + 1) / questions.length) * 100;
     const isAnswerCorrect = selectedAnswer === currentQuestion.correct_index;
+
+    // Timer progress logic
+    const totalTimeSeconds = questions.length === 10 ? 15 * 60 : 30 * 60; // 15min for 10q, 30min for 20q
+    const timerProgress = Math.min((timeElapsed / totalTimeSeconds) * 100, 100);
 
     // Get alternatives as array
     const alternatives = [
@@ -335,24 +339,44 @@ export function SimuladoExecution() {
             <div className="max-w-4xl mx-auto px-4">
                 {/* Header */}
                 <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg p-6 mb-6">
-                    <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                            <Clock className="h-5 w-5 text-emerald-500" />
-                            <span className="text-lg font-semibold text-slate-900 dark:text-white">
-                                {formatTime(timeElapsed)}
-                            </span>
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        {/* Timer Section */}
+                        <div className="flex-1 w-full">
+                            <div className="flex items-center justify-between mb-2">
+                                <div className="flex items-center gap-2">
+                                    <Clock className="h-5 w-5 text-emerald-500" />
+                                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Tempo</span>
+                                </div>
+                                <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+                                    {formatTime(timeElapsed)} / {formatTime(totalTimeSeconds)}
+                                </span>
+                            </div>
+                            <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                <div
+                                    className={`h-full transition-all duration-1000 ease-linear ${timerProgress > 80 ? 'bg-red-500' : timerProgress > 60 ? 'bg-yellow-500' : 'bg-emerald-500'}`}
+                                    style={{ width: `${timerProgress}%` }}
+                                />
+                            </div>
                         </div>
-                        <div className="text-sm text-slate-600 dark:text-slate-400">
-                            Questão {currentQuestionIndex + 1} de {questions.length}
-                        </div>
-                    </div>
 
-                    {/* Progress bar */}
-                    <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
-                        <div
-                            className="bg-gradient-to-r from-emerald-500 to-teal-600 h-2 rounded-full transition-all duration-300"
-                            style={{ width: `${progress}%` }}
-                        />
+                        {/* Divider */}
+                        <div className="hidden md:block w-px h-12 bg-slate-200 dark:bg-slate-700 mx-4"></div>
+
+                        {/* Question Progress Section */}
+                        <div className="flex-1 w-full">
+                            <div className="flex items-center justify-between mb-2">
+                                <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Progresso</span>
+                                <span className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                                    Questão {currentQuestionIndex + 1} de {questions.length}
+                                </span>
+                            </div>
+                            <div className="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+                                <div
+                                    className="h-full bg-blue-500 transition-all duration-300"
+                                    style={{ width: `${questionProgress}%` }}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
