@@ -14,7 +14,20 @@ import type { Database } from '@/types/database.types';
 type Simulado = Database['public']['Tables']['simulados']['Row'];
 // type SimuladoInsert = Database['public']['Tables']['simulados']['Insert']; // Unused
 type UserAnswer = Database['public']['Tables']['user_answers']['Row'];
-type Question = Database['public']['Tables']['questions_bank']['Row'];
+// We define Question interface based on usage since we removed questions_bank
+export interface Question {
+    id: string;
+    subject: string | null;
+    question: string; // The question text
+    category: string | null;
+    alternative_1: string;
+    alternative_2: string;
+    alternative_3: string;
+    alternative_4: string;
+    correct_index: number;
+    explanation: string | null;
+    image_url?: string | null; // Optional if existing
+}
 
 /**
  * Create a new simulado session
@@ -40,111 +53,97 @@ export async function createSimulado(
 }
 
 /**
- * Get questions by category
+ * Get questions by category (Refactored to use module-based distribution)
  */
 export async function getQuestionsByCategory(
     category: string,
-    limit: number = 20
+    totalCount: number = 20
 ): Promise<{ data: Question[] | null; error: any }> {
-    // 1. Determine which categories to fetch from questions_bank
-    // If the category is A, B, C, D, or E, we might want to fetch 'Geral' or specific topics
-    // since the bank might not have questions explicitly labeled 'A' etc.
-    // However, if the bank DOES have 'B', we should include it.
-    // Strategy: Fetch questions where category is the requested one OR 'Legislacao', 'Direcao Defensiva', etc.
-
-    const isLicenseCategory = ['A', 'B', 'C', 'D', 'E'].includes(category);
-
-    let bankQuery = (supabase as any)
-        .from('questions_bank')
-        .select('*');
-
-    if (isLicenseCategory) {
-        // For license categories, fetch questions that match the category OR general subjects
-        // Note: Supabase 'in' filter expects an array, and strings with spaces must be quoted in the filter string
-        bankQuery = bankQuery.or(`category.eq.${category},category.in.("Legislacao","Direcao Defensiva","Primeiros Socorros","Meio Ambiente","Mecanica")`);
-    } else {
-        // exact match for other categories
-        bankQuery = bankQuery.eq('category', category);
-    }
-
-    // We fetch a bit less to make room for Placas
-    const { data: bankData, error: bankError } = await bankQuery.limit(limit);
-
-    if (bankError) {
-        return { data: null, error: bankError };
-    }
-
-    // 2. Fetch questions from Placas table to mix in
-    // Optimization: Since table is small (~155 rows), we fetch all to perform robust random picking in memory.
-    // This avoids issues with sparse IDs or bad random ranges causing low question counts.
-
-    // CRITICAL FIX: Create a fresh anonymous client to bypass potential RLS issues with authenticated users.
-    // The script worked because it used a fresh client. The app failed because it used the auth client.
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
     const localClient = createClient<Database>(supabaseUrl, supabaseAnonKey, {
         auth: { persistSession: false }
     });
 
-    const { data: placasData, error: placasError } = await localClient
-        .from('questions_placas_cores_e_caminhos')
-        .select('*');
+    // Logical mandatory distribution:
+    // M1 Com Imagem: 15% to 20% (Target 15%)
+    // M1 Sem Imagem: 5% to 10% (Target 10%)
+    // M2: 25%
+    // M3: 25%
+    // M4: 25%
 
-    if (placasError) {
-        console.error('CRITICAL ERROR fetching Placas:', placasError);
-    } else {
-        console.log(`Successfully fetched ${placasData?.length} Placas questions via local client.`);
+    // Calculate shares (using integers to ensure sum is totalCount)
+    const m1_com_share = Math.floor(totalCount * 0.15);
+    const m1_sem_share = Math.floor(totalCount * 0.10);
+    const m2_share = Math.floor(totalCount * 0.25);
+    const m3_share = Math.floor(totalCount * 0.25);
+    // Use remainder for M4 to guarantee sum
+    const m4_share = totalCount - (m1_com_share + m1_sem_share + m2_share + m3_share);
+
+    const modules = [
+        { table: 'Modulo-1-com-imagem', limit: m1_com_share, prefix: 'm1c' },
+        { table: 'Modulo-1-sem-imagem', limit: m1_sem_share, prefix: 'm1s' },
+        { table: 'Modulo-2', limit: m2_share, prefix: 'm2' },
+        { table: 'Modulo-3', limit: m3_share, prefix: 'm3' },
+        { table: 'Modulo-4', limit: m4_share, prefix: 'm4' }
+    ];
+
+    const allQuestions: Question[] = [];
+
+    try {
+        for (const mod of modules) {
+            if (mod.limit <= 0) continue;
+
+            // Fetch random questions from each module
+            const { data, error } = await (localClient
+                .from(mod.table as any)
+                .select('*')
+                .limit(mod.limit) as any);
+
+            if (error) {
+                console.warn(`Error fetching from ${mod.table}:`, error);
+                continue;
+            }
+
+            if (data) {
+                const mapped = data.map((q: any) => ({
+                    id: `${mod.prefix}-${q.id}`,
+                    question: q.question,
+                    category: category,
+                    subject: q.subject || `Módulo ${mod.prefix}`,
+                    alternative_1: q.alternative_1,
+                    alternative_2: q.alternative_2,
+                    alternative_3: q.alternative_3,
+                    alternative_4: q.alternative_4,
+                    correct_index: q.correct_index,
+                    explanation: q.explanation,
+                    image_url: q.image_url || null
+                }));
+                allQuestions.push(...mapped);
+            }
+        }
+
+        // Shuffle all questions together
+        const shuffled = allQuestions.sort(() => Math.random() - 0.5);
+
+        // If we still don't have enough questions (e.g. some tables empty), 
+        // return what we have (or we could try to fill from others, but requirement is per-module)
+        return { data: shuffled, error: null };
+
+    } catch (err) {
+        console.error('SimuladoService distribution error:', err);
+        return { data: null, error: err };
     }
-
-    // Map Placas data to Question structure
-    const mappedPlacas = placasData ? placasData.map((q: any) => ({
-        ...q,
-        id: `placa-${q.id}`, // Prefix ID to avoid collision with bank UUIDs
-        category: category, // Assign current category so they fit in the section
-        subject: 'Placas, Cores e Caminhos'
-    })) : [];
-
-    // 3. Combine and Shuffle
-    // If bank has data, we use it. We fill the rest (or all) from Placas.
-    const combined = [...(bankData || []), ...mappedPlacas];
-
-    // Robust Shuffle (Fisher-Yates style sort)
-    const shuffled = combined.sort(() => Math.random() - 0.5);
-
-    // Return exact requested limit
-    // Slice ensures we don't return more than requested.
-    return { data: shuffled.slice(0, limit), error: null };
 }
 
 /**
- * Get questions from Placas table (questions_placas_cores_e_caminhos)
+ * Get questions from Placas table (Legacy/Specific access directly)
+ * Maintained for backward compatibility or direct calls
  */
 export async function getQuestionsFromPlacasTable(
     limit: number = 20
 ): Promise<{ data: Question[] | null; error: any }> {
-    // Create fresh client for robustness
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-    const localClient = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-        auth: { persistSession: false }
-    });
-
-    const { data, error } = await localClient
-        .from('questions_placas_cores_e_caminhos')
-        .select('*')
-        .lte('id', 158) // User specified ID 1-158
-        .limit(limit);
-
-    // Map to Question type and ensure ID is string
-    const mappedData = data ? data.map((q: any) => ({
-        ...q,
-        id: `placa-${q.id}`, // Prefix ID to avoid collision
-        // Ensure other required fields exist if missing
-        category: q.category || 'Placas',
-        subject: q.subject || 'Placas'
-    })) : [];
-
-    return { data: (mappedData as Question[]), error };
+    return getQuestionsByCategory('Placas', limit);
 }
 
 /**

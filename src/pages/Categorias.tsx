@@ -1,28 +1,31 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { 
-  Bike, 
-  Car, 
-  Truck, 
-  Bus, 
-  Container, 
-  ArrowRight, 
-  Clock, 
+import {
+  Bike,
+  ArrowRight,
+  Clock,
   Target,
   CheckCircle,
   Zap,
-  BookOpen
+  BookOpen,
+  Shield,
+  AlertTriangle,
+  MoveHorizontal,
+  Construction,
+  TrafficCone,
+  Heart,
+  ListOrdered
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { 
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import type { CategoriaCNH, TipoSimulado } from '@/types';
-import { estadosBrasil, categoriasInfo } from '@/data/questoes';
+import type { TipoSimulado } from '@/types';
+import { estadosBrasil } from '@/data/questoes';
 
 interface SimuladoOption {
   tipo: TipoSimulado;
@@ -35,7 +38,7 @@ interface SimuladoOption {
 
 export function Categorias() {
   const navigate = useNavigate();
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState<CategoriaCNH>('B');
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState<string>('Legislação');
   const [estado, setEstado] = useState<string>('SP');
 
   const opcoesSimulado: SimuladoOption[] = [
@@ -58,19 +61,29 @@ export function Categorias() {
   ];
 
   const categorias = [
-    { key: 'A', ...categoriasInfo.A },
-    { key: 'B', ...categoriasInfo.B },
-    { key: 'C', ...categoriasInfo.C },
-    { key: 'D', ...categoriasInfo.D },
-    { key: 'E', ...categoriasInfo.E },
+    { key: 'Legislação', nome: 'Legislação', descricao: 'Normas de circulação e conduta', cor: 'from-blue-500 to-indigo-600' },
+    { key: 'Sinalização Vertical (Placas)', nome: 'Sinalização Vertical', descricao: 'Placas de regulamentação, advertência e indicação', cor: 'from-yellow-500 to-orange-600' },
+    { key: 'Sinalização Horizontal (Pintura no solo)', nome: 'Sinalização Horizontal', descricao: 'Faixas e marcas na pista', cor: 'from-slate-500 to-gray-600' },
+    { key: 'Semáforos / Sinais Luminosos', nome: 'Semáforos', descricao: 'Sinais luminosos de controle de fluxo', cor: 'from-red-500 to-red-600' },
+    { key: 'Sinalização Temporária (Obras/Desvios)', nome: 'Sinalização Temporária', descricao: 'Obras e desvios na pista', cor: 'from-orange-500 to-amber-600' },
+    { key: 'Sinalização Ciclista', nome: 'Sinalização Ciclista', descricao: 'Ciclovias e ciclofaixas', cor: 'from-emerald-500 to-teal-600' },
+    { key: 'Dispositivos Auxiliares', nome: 'Dispositivos Auxiliares', descricao: 'Balizadores, tachões e barreiras', cor: 'from-indigo-500 to-purple-600' },
+    { key: 'Hierarquia de Sinalização', nome: 'Hierarquia', descricao: 'Ordem de prevalência da sinalização', cor: 'from-violet-500 to-purple-600' },
+    { key: 'Direção Defensiva', nome: 'Direção Defensiva', descricao: 'Prevenção de acidentes e segurança', cor: 'from-green-500 to-emerald-600' },
+    { key: 'Cuidar, Agir e Preservar', nome: 'Cuidar, Agir e Preservar', descricao: 'Primeiros socorros e meio ambiente', cor: 'from-pink-500 to-rose-600' },
   ];
 
-  const iconMap = {
-    A: Bike,
-    B: Car,
-    C: Truck,
-    D: Bus,
-    E: Container
+  const iconMap: Record<string, React.ElementType> = {
+    'Legislação': BookOpen,
+    'Sinalização Vertical (Placas)': AlertTriangle,
+    'Sinalização Horizontal (Pintura no solo)': MoveHorizontal,
+    'Semáforos / Sinais Luminosos': TrafficCone,
+    'Sinalização Temporária (Obras/Desvios)': Construction,
+    'Sinalização Ciclista': Bike,
+    'Dispositivos Auxiliares': Zap,
+    'Hierarquia de Sinalização': ListOrdered,
+    'Direção Defensiva': Shield,
+    'Cuidar, Agir e Preservar': Heart,
   };
 
   const iniciarSimulado = (tipo: TipoSimulado, quantidade: number) => {
@@ -86,7 +99,7 @@ export function Categorias() {
             Escolha seu simulado
           </h1>
           <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-            Selecione a categoria da sua CNH e o tipo de simulado que deseja fazer. 
+            Selecione a categoria da sua CNH e o tipo de simulado que deseja fazer.
             Todas as questões são baseadas no conteúdo oficial do Detran.
           </p>
         </div>
@@ -101,18 +114,17 @@ export function Categorias() {
 
               <div className="space-y-3 mb-6">
                 {categorias.map((cat) => {
-                  const Icon = iconMap[cat.key as keyof typeof iconMap];
+                  const Icon = iconMap[cat.key];
                   const isSelected = categoriaSelecionada === cat.key;
 
                   return (
                     <button
                       key={cat.key}
-                      onClick={() => setCategoriaSelecionada(cat.key as CategoriaCNH)}
-                      className={`w-full flex items-center gap-3 p-3 rounded-xl border-2 transition-all ${
-                        isSelected
-                          ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
-                          : 'border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-700'
-                      }`}
+                      onClick={() => setCategoriaSelecionada(cat.key)}
+                      className={`w-full flex items-center gap-3 p-3 rounded-xl border-2 transition-all ${isSelected
+                        ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
+                        : 'border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-700'
+                        }`}
                     >
                       <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${cat.cor} flex items-center justify-center`}>
                         <Icon className="h-5 w-5 text-white" />

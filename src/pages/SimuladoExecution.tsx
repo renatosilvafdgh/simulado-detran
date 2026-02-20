@@ -17,12 +17,12 @@ import {
     getQuestionsByCategory,
     getQuestionsFromPlacasTable,
     saveUserAnswer,
-    completeSimulado
+    completeSimulado,
+    type Question
 } from '@/services/simulado.service';
 import { supabase } from '@/lib/supabase';
 import type { Database } from '@/types/database.types';
 
-type Question = Database['public']['Tables']['questions_bank']['Row'];
 type Simulado = Database['public']['Tables']['simulados']['Row'];
 
 interface UserAnswer {
@@ -408,8 +408,8 @@ export function SimuladoExecution() {
                                 >
                                     <div className="flex items-start gap-3">
                                         <div className={`w-8 h-8 rounded-full flex-shrink-0 flex items-center justify-center font-semibold ${showFeedback
-                                                ? (isCorrectOption ? 'bg-emerald-500 text-white' : (isSelected ? 'bg-red-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-400'))
-                                                : (isSelected ? 'bg-emerald-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400')
+                                            ? (isCorrectOption ? 'bg-emerald-500 text-white' : (isSelected ? 'bg-red-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-400'))
+                                            : (isSelected ? 'bg-emerald-500 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-400')
                                             }`}>
                                             {optionNumber}
                                         </div>
@@ -464,8 +464,8 @@ export function SimuladoExecution() {
                             onClick={handleAction}
                             disabled={selectedAnswer === null || submitting}
                             className={`flex items-center gap-2 text-white ${!showFeedback
-                                    ? 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700'
-                                    : 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700'
+                                ? 'bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700'
+                                : 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700'
                                 }`}
                         >
                             {submitting ? (

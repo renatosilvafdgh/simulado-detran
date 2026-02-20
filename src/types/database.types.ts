@@ -49,13 +49,53 @@ export type Database = {
                     icon?: string | null
                 }
             }
-            questions_bank: {
+            'Modulo-1-com-imagem': {
                 Row: {
-                    id: string
-                    subject: string
+                    id: number
+                    subject: string | null
                     question: string
-                    category: string
-                    state: string
+                    category: string | null
+                    alternative_1: string
+                    alternative_2: string
+                    alternative_3: string
+                    alternative_4: string
+                    correct_index: number
+                    explanation: string | null
+                    image_url: string | null
+                }
+                Insert: {
+                    id?: number
+                    subject?: string | null
+                    question: string
+                    category?: string | null
+                    alternative_1: string
+                    alternative_2: string
+                    alternative_3: string
+                    alternative_4: string
+                    correct_index: number
+                    explanation?: string | null
+                    image_url?: string | null
+                }
+                Update: {
+                    id?: number
+                    subject?: string | null
+                    question?: string
+                    category?: string | null
+                    alternative_1?: string
+                    alternative_2?: string
+                    alternative_3?: string
+                    alternative_4?: string
+                    correct_index?: number
+                    explanation?: string | null
+                    image_url?: string | null
+                }
+            }
+            'Modulo-1-sem-imagem': {
+                Row: {
+                    id: number
+                    subject: string | null
+                    question: string
+                    category: string | null
                     alternative_1: string
                     alternative_2: string
                     alternative_3: string
@@ -64,11 +104,10 @@ export type Database = {
                     explanation: string | null
                 }
                 Insert: {
-                    id?: string
-                    subject: string
+                    id?: number
+                    subject?: string | null
                     question: string
-                    category: string
-                    state: string
+                    category?: string | null
                     alternative_1: string
                     alternative_2: string
                     alternative_3: string
@@ -77,17 +116,139 @@ export type Database = {
                     explanation?: string | null
                 }
                 Update: {
-                    id?: string
-                    subject?: string
+                    id?: number
+                    subject?: string | null
                     question?: string
-                    category?: string
-                    state?: string
+                    category?: string | null
                     alternative_1?: string
                     alternative_2?: string
                     alternative_3?: string
                     alternative_4?: string
                     correct_index?: number
                     explanation?: string | null
+                }
+            }
+            'Modulo-2': {
+                Row: {
+                    id: number
+                    subject: string | null
+                    question: string
+                    category: string | null
+                    alternative_1: string
+                    alternative_2: string
+                    alternative_3: string
+                    alternative_4: string
+                    correct_index: number
+                    explanation: string | null
+                    image_url: string | null
+                }
+                Insert: {
+                    id?: number
+                    subject?: string | null
+                    question: string
+                    category?: string | null
+                    alternative_1: string
+                    alternative_2: string
+                    alternative_3: string
+                    alternative_4: string
+                    correct_index: number
+                    explanation?: string | null
+                    image_url?: string | null
+                }
+                Update: {
+                    id?: number
+                    subject?: string | null
+                    question?: string
+                    category?: string | null
+                    alternative_1?: string
+                    alternative_2?: string
+                    alternative_3?: string
+                    alternative_4?: string
+                    correct_index?: number
+                    explanation?: string | null
+                    image_url?: string | null
+                }
+            }
+            'Modulo-3': {
+                Row: {
+                    id: number
+                    subject: string | null
+                    question: string
+                    category: string | null
+                    alternative_1: string
+                    alternative_2: string
+                    alternative_3: string
+                    alternative_4: string
+                    correct_index: number
+                    explanation: string | null
+                    image_url: string | null
+                }
+                Insert: {
+                    id?: number
+                    subject?: string | null
+                    question: string
+                    category?: string | null
+                    alternative_1: string
+                    alternative_2: string
+                    alternative_3: string
+                    alternative_4: string
+                    correct_index: number
+                    explanation?: string | null
+                    image_url?: string | null
+                }
+                Update: {
+                    id?: number
+                    subject?: string | null
+                    question?: string
+                    category?: string | null
+                    alternative_1?: string
+                    alternative_2?: string
+                    alternative_3?: string
+                    alternative_4?: string
+                    correct_index?: number
+                    explanation?: string | null
+                    image_url?: string | null
+                }
+            }
+            'Modulo-4': {
+                Row: {
+                    id: number
+                    subject: string | null
+                    question: string
+                    category: string | null
+                    alternative_1: string
+                    alternative_2: string
+                    alternative_3: string
+                    alternative_4: string
+                    correct_index: number
+                    explanation: string | null
+                    image_url: string | null
+                }
+                Insert: {
+                    id?: number
+                    subject?: string | null
+                    question: string
+                    category?: string | null
+                    alternative_1: string
+                    alternative_2: string
+                    alternative_3: string
+                    alternative_4: string
+                    correct_index: number
+                    explanation?: string | null
+                    image_url?: string | null
+                }
+                Update: {
+                    id?: number
+                    subject?: string | null
+                    question?: string
+                    category?: string | null
+                    alternative_1?: string
+                    alternative_2?: string
+                    alternative_3?: string
+                    alternative_4?: string
+                    correct_index?: number
+                    explanation?: string | null
+                    image_url?: string | null
                 }
             }
             simulados: {

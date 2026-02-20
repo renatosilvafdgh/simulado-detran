@@ -12,7 +12,14 @@ import {
   CheckCircle,
   Zap,
   BookOpen,
-  Loader2
+  Loader2,
+  Shield,
+  AlertTriangle,
+  Construction,
+  TrafficCone,
+  Heart,
+  ListOrdered,
+  MoveHorizontal
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 // Select imports removed
@@ -49,19 +56,10 @@ export function Simulado() {
         const { data, error } = await getCategories();
         if (data && !error) {
           console.log('Received Categories:', data.map(c => c.name));
-          // Filter out 'Placas' category as requested
-          // Enhanced filter to catch any variation
-          const filteredCategories = data.filter(c => {
-            const name = c.name.toLowerCase();
-            return !name.includes('placa') &&
-              !name.includes('caminho') &&
-              !name.includes('cor');
-          });
-          console.log('Filtered Categories:', filteredCategories.map(c => c.name));
-          setCategories(filteredCategories);
+          setCategories(data);
 
-          if (filteredCategories.length > 0) {
-            setCategoriaSelecionada(filteredCategories[0].id);
+          if (data.length > 0) {
+            setCategoriaSelecionada(data[0].id);
           }
         }
       } catch (err) {
@@ -94,6 +92,17 @@ export function Simulado() {
   ];
 
   const iconMap: Record<string, React.ElementType> = {
+    'Legislação': BookOpen,
+    'Sinalização Vertical (Placas)': AlertTriangle,
+    'Sinalização Horizontal (Pintura no solo)': MoveHorizontal,
+    'Semáforos / Sinais Luminosos': TrafficCone,
+    'Sinalização Temporária (Obras/Desvios)': Construction,
+    'Sinalização Ciclista': Bike,
+    'Dispositivos Auxiliares': Zap,
+    'Hierarquia de Sinalização': ListOrdered,
+    'Direção Defensiva': Shield,
+    'Cuidar, Agir e Preservar': Heart,
+    // Keep old ones just in case/for fallback
     'A': Bike,
     'B': Car,
     'C': Truck,
