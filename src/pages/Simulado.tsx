@@ -1,20 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   BookOpen,
   Zap,
   Clock,
   ArrowRight,
-  Loader2,
-  CheckCircle,   // added if used by SimuladoOption or other, keeping for safety
-  Shield,
-  Target
+  Loader2
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { AuthModal } from '@/components/auth/AuthModal';
 import { getQuestionsByCategory, createSimulado } from '@/services/simulado.service';
-import type { Database } from '@/types/database.types';
 
 interface SimuladoOption {
   tipo: 'RAPIDO' | 'COMPLETO';

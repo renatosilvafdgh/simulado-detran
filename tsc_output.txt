@@ -1,0 +1,5 @@
+﻿src/pages/Simulado.tsx(1,20): error TS6133: 'useEffect' is declared but its value is never read.
+src/pages/Simulado.tsx(9,3): error TS6133: 'CheckCircle' is declared but its value is never read.
+src/pages/Simulado.tsx(10,3): error TS6133: 'Shield' is declared but its value is never read.
+src/pages/Simulado.tsx(11,3): error TS6133: 'Target' is declared but its value is never read.
+src/pages/Simulado.tsx(17,1): error TS6133: 'Database' is declared but its value is never read.
