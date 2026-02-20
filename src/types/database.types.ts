@@ -251,6 +251,29 @@ export type Database = {
                     image_url?: string | null
                 }
             }
+            simulado_sessions: {
+                Row: {
+                    id: string
+                    session_id: string
+                    question_id: string
+                    module: string
+                    created_at: string
+                }
+                Insert: {
+                    id?: string
+                    session_id: string
+                    question_id: string
+                    module: string
+                    created_at?: string
+                }
+                Update: {
+                    id?: string
+                    session_id?: string
+                    question_id?: string
+                    module?: string
+                    created_at?: string
+                }
+            }
             simulados: {
                 Row: {
                     id: string
