@@ -73,6 +73,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
               size="icon"
               onClick={toggleTheme}
               className="rounded-full hover:bg-slate-100 dark:hover:bg-slate-800"
+              aria-label="Alternar tema de cores"
             >
               {theme === 'light' ? (
                 <Moon className="h-5 w-5 text-slate-600" />
@@ -91,7 +92,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon" className="rounded-full">
+                <Button variant="ghost" size="icon" className="rounded-full" aria-label="Abrir menu de navegação">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
