@@ -230,3 +230,40 @@ html {
   background-color: #64748b;
   /* slate-500 */
 }
+
+/* Outline Variant for 3D Button (White -> Green on hover) */
+.btn-3d-outline .btn-3d-top {
+  color: #065f46;
+  /* text-emerald-800 */
+  text-shadow: 0 1px rgba(255, 255, 255, 0.8);
+  transition: color 0.15s ease-out;
+}
+
+.btn-3d-outline .btn-3d-top::after {
+  background-image: radial-gradient(#ffffff, #cbd5e1);
+}
+
+.btn-3d-outline .btn-3d-bottom {
+  background-color: #64748b;
+  /* slate-500 */
+}
+
+/* Hover/Active states change to Green */
+.btn-3d-outline:hover .btn-3d-top,
+.btn-3d-outline:focus-visible .btn-3d-top,
+.btn-3d-outline:active .btn-3d-top {
+  color: #ffffff;
+  text-shadow: 0 -1px rgba(0, 0, 0, .25);
+}
+
+.btn-3d-outline:hover .btn-3d-top::after,
+.btn-3d-outline:focus-visible .btn-3d-top::after,
+.btn-3d-outline:active .btn-3d-top::after {
+  background-image: radial-gradient(#10b981, #059669);
+}
+
+.btn-3d-outline:hover .btn-3d-bottom,
+.btn-3d-outline:focus-visible .btn-3d-bottom,
+.btn-3d-outline:active .btn-3d-bottom {
+  background-color: #064e3b;
+}
