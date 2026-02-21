@@ -53,8 +53,10 @@ export function Contato() {
         recaptchaRef.current?.reset();
       }, 3000);
     } catch (error: any) {
-      console.error('Erro ao enviar contato:', error);
-      alert(`Erro ao enviar: ${error?.text || error?.message || 'Erro desconhecido'}. Tente novamente mais tarde.`);
+      console.error('Erro detalhado EmailJS:', error);
+      const errorMsg = error?.text || error?.message || (typeof error === 'string' ? error : JSON.stringify(error));
+      const status = error?.status || 'N/A';
+      alert(`Erro ao enviar (Status: ${status}): ${errorMsg}. Verifique se todas as chaves no seu ambiente de produção estão corretas.`);
     } finally {
       setIsSubmitting(false);
     }
@@ -207,12 +209,18 @@ export function Contato() {
                     />
                   </div>
 
-                  <div className="flex justify-center py-2">
-                    <ReCAPTCHA
-                      ref={recaptchaRef}
-                      sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                      onChange={(token) => setRecaptchaToken(token)}
-                    />
+                  <div className="flex justify-center py-2 min-h-[78px]">
+                    {import.meta.env.VITE_RECAPTCHA_SITE_KEY ? (
+                      <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                        onChange={(token) => setRecaptchaToken(token)}
+                      />
+                    ) : (
+                      <div className="text-sm text-red-500 bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-200 dark:border-red-800">
+                        Erro: Chave reCAPTCHA não configurada no .env.local
+                      </div>
+                    )}
                   </div>
 
                   <Button
