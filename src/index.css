@@ -69,6 +69,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground antialiased;
   }
@@ -147,8 +148,7 @@ html {
   text-align: center;
   color: #fff;
   text-shadow: 0 -1px rgba(0, 0, 0, .25);
-  transition-property: transform;
-  transition-duration: .2s;
+  transition: transform 0.15s ease-out;
   -webkit-user-select: none;
   user-select: none;
   font-weight: 600;
@@ -163,7 +163,7 @@ html {
   content: '';
   position: absolute;
   z-index: -1;
-  border-radius: 8px;
+  border-radius: 10px;
   width: 100%;
   height: 100%;
   box-sizing: content-box;
@@ -171,13 +171,6 @@ html {
   text-align: center;
   color: #fff;
   box-shadow: inset 0 0 0px 1px rgba(255, 255, 255, .2), 0 1px 2px 1px rgba(255, 255, 255, .2);
-  transition-property: border-radius, padding, width, transform;
-  transition-duration: .2s;
-}
-
-.btn-3d:active:not(:disabled) .btn-3d-top::after {
-  border-radius: 10px;
-  padding: 0 2px;
 }
 
 .btn-3d-bottom {
@@ -185,7 +178,7 @@ html {
   z-index: -1;
   bottom: 4px;
   left: 4px;
-  border-radius: 12px / 20px 20px 12px 12px;
+  border-radius: 14px 14px 12px 12px / 12px;
   padding-top: 6px;
   width: calc(100% - 8px);
   height: calc(100% - 10px);
@@ -193,13 +186,6 @@ html {
   background-color: #064e3b;
   background-image: radial-gradient(4px 8px at 4px calc(100% - 8px), rgba(255, 255, 255, .25), transparent), radial-gradient(4px 8px at calc(100% - 4px) calc(100% - 8px), rgba(255, 255, 255, .25), transparent), radial-gradient(16px at -4px 0, white, transparent), radial-gradient(16px at calc(100% + 4px) 0, white, transparent);
   box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5), inset 0 -1px 3px 3px rgba(0, 0, 0, .4);
-  transition-property: border-radius, padding-top;
-  transition-duration: .2s;
-}
-
-.btn-3d:active:not(:disabled) .btn-3d-bottom {
-  border-radius: 14px 14px 12px 12px / 12px;
-  padding-top: 0;
 }
 
 .btn-3d-base {
