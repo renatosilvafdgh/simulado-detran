@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Phone, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { Mail, MapPin, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -101,15 +101,11 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-3">
                 <Mail className="h-5 w-5 text-emerald-500 mt-0.5" />
-                <span className="text-slate-400 text-sm">contato@simuladobrasil.com.br</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Phone className="h-5 w-5 text-emerald-500 mt-0.5" />
-                <span className="text-slate-400 text-sm">(11) 4000-1234</span>
+                <span className="text-slate-400 text-sm">contato@souhabilitado.com</span>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="h-5 w-5 text-emerald-500 mt-0.5" />
-                <span className="text-slate-400 text-sm">São Paulo, SP - Brasil</span>
+                <span className="text-slate-400 text-sm">Teresina, PI - Brasil</span>
               </li>
             </ul>
           </div>
