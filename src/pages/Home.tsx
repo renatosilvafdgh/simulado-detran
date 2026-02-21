@@ -151,14 +151,14 @@ export function Home() {
                 </button>
               </Link>
               <Link to="/blog">
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="px-8 py-6 text-lg"
-                >
-                  <BookOpen className="mr-2 h-5 w-5" />
-                  Ver Dicas de Estudo
-                </Button>
+                <button className="btn-3d btn-3d-outline group focus:outline-none">
+                  <span className="btn-3d-top">
+                    <BookOpen className="mr-2 h-5 w-5" />
+                    Ver Dicas de Estudo
+                  </span>
+                  <span className="btn-3d-bottom"></span>
+                  <span className="btn-3d-base"></span>
+                </button>
               </Link>
             </div>
 
