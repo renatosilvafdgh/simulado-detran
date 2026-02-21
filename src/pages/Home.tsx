@@ -141,13 +141,14 @@ export function Home() {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <Link to="/simulado">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-8 py-6 text-lg shadow-xl shadow-emerald-500/25"
-                >
-                  Começar Simulado Grátis
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <button className="btn-3d group focus:outline-none">
+                  <span className="btn-3d-top">
+                    Começar Simulado Grátis
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                  <span className="btn-3d-bottom"></span>
+                  <span className="btn-3d-base"></span>
+                </button>
               </Link>
               <Link to="/blog">
                 <Button
@@ -305,13 +306,14 @@ export function Home() {
                 é só escolher a categoria e começar a estudar!
               </p>
               <Link to="/simulado">
-                <Button
-                  size="lg"
-                  className="bg-white text-emerald-600 hover:bg-emerald-50 px-8 py-6 text-lg font-semibold shadow-xl"
-                >
-                  Iniciar Simulado Agora
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
+                <button className="btn-3d group focus:outline-none w-full max-w-sm mx-auto">
+                  <span className="btn-3d-top !bg-white !text-emerald-600 !after:bg-white !after:bg-none">
+                    Iniciar Simulado Agora
+                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                  </span>
+                  <span className="btn-3d-bottom !bg-slate-200"></span>
+                  <span className="btn-3d-base"></span>
+                </button>
               </Link>
             </div>
           </div>
