@@ -311,7 +311,7 @@ export function Home() {
       {/* Testimonials Section */}
       <section className="py-10 lg:py-16 bg-slate-50 dark:bg-slate-900/50">
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="text-center mb-12">
+          <div className="text-center mb-4">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
               O que nossos alunos dizem
             </h2>
@@ -321,7 +321,7 @@ export function Home() {
             </p>
           </div>
 
-          <div className="mt-8 relative">
+          <div className="relative">
             <TestimonialCarousel testimonials={testimonials} />
           </div>
         </div>

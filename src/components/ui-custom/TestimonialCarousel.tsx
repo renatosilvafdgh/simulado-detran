@@ -61,10 +61,10 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
     };
 
     return (
-        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-12 py-8">
+        <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-12 pb-8 pt-2">
 
             {/* Cards Container */}
-            <div className="relative overflow-hidden pt-4 pb-12 px-2">
+            <div className="relative overflow-hidden pt-0 pb-12 px-2">
                 <div
                     className="flex transition-transform duration-500 ease-out"
                     style={{ transform: `translateX(-${currentIndex * (100 / visibleItems)}%)` }}
