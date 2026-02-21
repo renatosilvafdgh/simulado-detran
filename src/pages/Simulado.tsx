@@ -7,7 +7,6 @@ import {
   ArrowRight,
   Loader2
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 import { AuthModal } from '@/components/auth/AuthModal';
 import { getQuestionsByCategory, createSimulado } from '@/services/simulado.service';
@@ -147,23 +146,27 @@ export function Simulado() {
                     </span>
                   </div>
 
-                  <Button
+                  <button
                     onClick={() => iniciarSimulado(opcao.tipo, opcao.questoes)}
                     disabled={generatingSimulado}
-                    className="w-full h-12 text-lg bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white disabled:opacity-50 transition-all rounded-xl shadow-lg shadow-emerald-500/20"
+                    className="btn-3d disabled:opacity-50 disabled:cursor-not-allowed group focus:outline-none"
                   >
-                    {generatingSimulado ? (
-                      <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        Gerando...
-                      </>
-                    ) : (
-                      <>
-                        Iniciar Agora
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                      </>
-                    )}
-                  </Button>
+                    <span className="btn-3d-top">
+                      {generatingSimulado ? (
+                        <>
+                          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                          Gerando...
+                        </>
+                      ) : (
+                        <>
+                          Iniciar Agora
+                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                        </>
+                      )}
+                    </span>
+                    <span className="btn-3d-bottom"></span>
+                    <span className="btn-3d-base"></span>
+                  </button>
                 </div>
               );
             })}
