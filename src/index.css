@@ -127,6 +127,9 @@ html {
   -webkit-appearance: none;
   appearance: none;
   position: relative;
+  z-index: 1;
+  /* Cria contexto de empilhamento para evitar que -1 esconda atrás do pai */
+  isolation: isolate;
   border-width: 0;
   padding: 0 8px 12px;
   min-width: 10em;
