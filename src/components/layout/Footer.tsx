@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,20 +19,7 @@ export function Footer() {
               A melhor plataforma de simulados para prova teórica do Detran.
               Estude com questões atualizadas e passe na primeira tentativa.
             </p>
-            <div className="flex items-center gap-3">
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-emerald-600 flex items-center justify-center transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-emerald-600 flex items-center justify-center transition-colors">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-emerald-600 flex items-center justify-center transition-colors">
-                <Youtube className="h-5 w-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800 hover:bg-emerald-600 flex items-center justify-center transition-colors">
-                <Twitter className="h-5 w-5" />
-              </a>
-            </div>
+
           </div>
 
           {/* Quick Links */}
