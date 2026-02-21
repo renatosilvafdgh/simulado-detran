@@ -2,6 +2,9 @@
   RewriteEngine On
   RewriteBase /
   
+  # Prevent MultiViews from interfering with SPA routes
+  Options -MultiViews
+  
   # Don't rewrite files or directories
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
