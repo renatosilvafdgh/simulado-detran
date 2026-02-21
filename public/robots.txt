@@ -1,4 +1,7 @@
+# robots.txt para Simulado Brasil
+
 User-agent: *
 Disallow:
 
+# Sitemap do site
 Sitemap: https://souhabilitado.com/sitemap.xml

@@ -6,6 +6,10 @@
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   
+  # Explicitly allow SEO files
+  RewriteCond %{REQUEST_URI} !^/robots\.txt$
+  RewriteCond %{REQUEST_URI} !^/sitemap\.xml$
+  
   # Rewrite everything else to index.html for SPA routing
   RewriteRule ^ index.html [L]
 </IfModule>
