@@ -94,14 +94,14 @@ export function Simulado() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen pt-24 pb-16 flex items-center justify-center">
+      <div className="min-h-screen pt-32 lg:pt-36 pb-16 flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-16 relative overflow-hidden bg-slate-50/50 dark:bg-slate-900/50">
+    <div className="min-h-screen pt-32 lg:pt-36 pb-16 relative overflow-hidden bg-slate-50/50 dark:bg-slate-900/50">
       {/* Decorative Blob Backgrounds for Glass Effect */}
       <div className="absolute inset-0 pointer-events-none -z-10">
         <div className="absolute top-[10%] left-[10%] w-[30rem] h-[30rem] rounded-full bg-emerald-400/20 blur-[120px] mix-blend-multiply dark:mix-blend-screen transition-all duration-1000"></div>

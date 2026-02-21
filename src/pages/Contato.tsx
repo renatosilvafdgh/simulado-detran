@@ -63,7 +63,7 @@ export function Contato() {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-32 lg:pt-36 pb-16">
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
         {/* Header */}
         <div className="text-center mb-12">

@@ -28,14 +28,14 @@ export function Blog() {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-24 pb-12 flex items-center justify-center">
+      <div className="min-h-screen pt-32 lg:pt-36 pb-12 flex items-center justify-center">
         <div className="text-emerald-600">Carregando...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
+    <div className="min-h-screen pt-32 lg:pt-36 pb-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4">
