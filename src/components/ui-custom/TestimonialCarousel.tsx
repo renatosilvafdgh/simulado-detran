@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Testimonial {
     name: string;
@@ -82,48 +82,37 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
                                     transform: `scale(${isVisible ? 1 : 0.95})`
                                 }}
                             >
-                                <div className="relative h-full flex flex-col justify-between bg-white dark:bg-slate-800 rounded-3xl p-8 md:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.2)] border border-slate-100/80 dark:border-slate-700/50 mt-4 mx-auto max-w-2xl transform transition-transform hover:-translate-y-1 duration-300">
-
+                                <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 md:p-8 shadow-lg border border-slate-100 dark:border-slate-700 mx-auto max-w-sm h-full flex flex-col justify-between">
                                     <div>
-                                        {/* Decorative Quote Mark */}
-                                        <div className="absolute -top-6 -left-2 text-emerald-100 dark:text-slate-700/50">
-                                            <Quote className="w-16 h-16 fill-current -rotate-12" />
-                                        </div>
-
                                         {/* Rating */}
-                                        <div className="relative flex justify-center mb-6 z-10">
-                                            <div className="inline-flex gap-1.5 bg-yellow-50 dark:bg-yellow-900/20 px-3 py-1.5 rounded-full ring-1 ring-yellow-100 dark:ring-yellow-900/40">
-                                                {Array.from({ length: 5 }).map((_, i) => (
-                                                    <Star
-                                                        key={i}
-                                                        className={`h-4 w-4 md:h-5 md:w-5 ${i < testimonial.rating
-                                                            ? 'text-yellow-400 fill-yellow-400 drop-shadow-sm'
-                                                            : 'text-slate-200 dark:text-slate-600'
-                                                            }`}
-                                                    />
-                                                ))}
-                                            </div>
+                                        <div className="flex items-center gap-1 mb-4">
+                                            {Array.from({ length: 5 }).map((_, i) => (
+                                                <Star
+                                                    key={i}
+                                                    className={`h-4 w-4 md:h-5 md:w-5 ${i < testimonial.rating
+                                                        ? 'text-yellow-400 fill-yellow-400'
+                                                        : 'text-slate-300 dark:text-slate-600'
+                                                        }`}
+                                                />
+                                            ))}
                                         </div>
 
                                         {/* Content */}
-                                        <div className="relative z-10 flex items-center justify-center">
-                                            <p className="text-slate-700 dark:text-slate-200 text-base md:text-lg leading-relaxed text-center italic font-medium">
-                                                "{testimonial.content}"
-                                            </p>
-                                        </div>
+                                        <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base leading-relaxed mb-6 text-left">
+                                            "{testimonial.content}"
+                                        </p>
                                     </div>
 
                                     {/* Author */}
-                                    <div className="flex flex-col items-center gap-3 mt-8 relative z-10">
-                                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white font-bold text-lg shadow-[0_0_0_4px_rgba(255,255,255,1),0_4px_10px_rgba(0,0,0,0.1)] dark:shadow-[0_0_0_4px_rgba(30,41,59,1),0_4px_10px_rgba(0,0,0,0.3)] ring-1 ring-black/5 dark:ring-white/10 shrink-0">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-11 h-11 rounded-full bg-emerald-500 shrink-0 flex items-center justify-center text-white font-semibold shadow-sm">
                                             {testimonial.avatar}
                                         </div>
-                                        <div className="text-center">
-                                            <p className="font-bold text-slate-900 dark:text-white text-base tracking-tight">{testimonial.name}</p>
-                                            <p className="text-emerald-600 dark:text-emerald-400 text-sm font-medium mt-0.5">{testimonial.role}</p>
+                                        <div className="text-left">
+                                            <p className="font-semibold text-slate-900 dark:text-white text-sm">{testimonial.name}</p>
+                                            <p className="text-slate-500 dark:text-slate-400 text-xs">{testimonial.role}</p>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         );
