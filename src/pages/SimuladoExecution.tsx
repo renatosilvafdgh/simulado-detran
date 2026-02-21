@@ -338,6 +338,25 @@ export function SimuladoExecution() {
                     <div className="flex-1 flex flex-col w-full">
                         {/* Removed Status Bar - Information moved to Navigation Sidebar */}
 
+                        {/* Mobile Status Bar (Timer & Question Count) - Hidden on Desktop */}
+                        <div className="lg:hidden bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 mb-4 flex justify-between items-center">
+                            <div className="flex flex-col">
+                                <div className="flex items-center gap-1.5 text-slate-500 mb-1">
+                                    <Clock className="h-3.5 w-3.5" />
+                                    <span className="text-[10px] font-bold uppercase tracking-widest">Tempo</span>
+                                </div>
+                                <div className="text-lg font-bold font-mono text-slate-800 dark:text-white leading-none">
+                                    {formatTime(timeElapsed)}
+                                </div>
+                            </div>
+                            <div className="text-right flex flex-col items-end">
+                                <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Questão</div>
+                                <div className="text-lg font-bold text-slate-800 dark:text-white leading-none">
+                                    {currentQuestionIndex + 1} <span className="text-sm font-normal text-slate-400">/ {questions.length}</span>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Question Box */}
                         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 flex-grow mb-4">
                             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug mb-4">
@@ -470,8 +489,8 @@ export function SimuladoExecution() {
                     <div className="w-full lg:w-80 flex flex-col gap-4">
                         {/* Status & Navigation Grid */}
                         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 sm:p-5">
-                            {/* Status Section Moved Here */}
-                            <div className="flex justify-between items-center mb-4 pb-4 border-b border-slate-100 dark:border-slate-700">
+                            {/* Status Section Moved Here - Hidden on mobile, as it's shown above the question */}
+                            <div className="hidden lg:flex justify-between items-center mb-4 pb-4 border-b border-slate-100 dark:border-slate-700">
                                 <div className="flex flex-col">
                                     <div className="flex items-center gap-1.5 text-slate-500 mb-1">
                                         <Clock className="h-3.5 w-3.5" />
