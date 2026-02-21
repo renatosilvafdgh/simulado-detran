@@ -191,44 +191,54 @@ export function Home() {
       </section>
 
       {/* States Section */}
-      <section className="py-20 lg:py-32">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="text-center mb-12">
+      <section className="py-20 lg:py-32 relative overflow-hidden">
+        {/* Colorful background blobs to make the glassmorphism pop */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-400/20 dark:bg-emerald-600/20 rounded-full blur-[100px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-yellow-400/20 dark:bg-yellow-600/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-teal-400/10 dark:bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12 z-10">
+          <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
               Selecione seu Estado
             </h2>
             <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Clique na bandeira do seu estado para começar
+              Clique na bandeira do seu estado para gerar um simulado especializado
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 max-w-[1400px] mx-auto">
             {estados.map((estado) => (
               <Link
                 key={estado.sigla}
                 to={`/simulado?estado=${estado.sigla}`}
-                className="group flex flex-col bg-gradient-to-b from-[#fecb00] to-[#e6b800] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-300/50 hover:border-amber-400 hover:-translate-y-1 overflow-hidden"
+                className="group relative flex flex-col p-4 sm:p-5 rounded-[2rem] transition-all duration-500 hover:-translate-y-2 overflow-hidden bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-slate-800/60"
               >
-                <div className="w-full aspect-[4/3] overflow-hidden bg-slate-100 relative border-b border-amber-300/30">
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors z-10 pointer-events-none" />
+                {/* Flag Image */}
+                <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.08)] group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.15)] transition-shadow duration-500 border border-white/50 dark:border-slate-700/50 mb-4 sm:mb-5 bg-slate-100 dark:bg-slate-900">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <img
                     src={`/flags/${estado.sigla.toLowerCase()}.png`}
                     alt={`Bandeira do ${estado.nome}`}
-                    className="w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                     onError={(e) => {
-                      // Fallback visual se a bandeira não existir
-                      (e.target as HTMLImageElement).src = `https://placehold.co/400x300/fecb00/000000?text=${estado.sigla}`;
+                      (e.target as HTMLImageElement).src = `https://placehold.co/600x400/f8f9fa/6b7280?text=${estado.sigla}`;
                     }}
                   />
                 </div>
-                <div className="p-4 text-center flex-grow flex flex-col justify-center">
-                  <p className="text-[10px] font-bold text-amber-900/60 uppercase tracking-widest mb-1">
-                    Simulado Detran
+
+                {/* Text Section */}
+                <div className="text-center w-full flex flex-col justify-center flex-grow transition-transform duration-500 group-hover:-translate-y-1 relative z-20">
+                  <p className="text-[10px] sm:text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.15em] mb-1 sm:mb-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
+                    Simulado
                   </p>
-                  <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
+                  <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-slate-800 dark:text-slate-100 leading-tight">
                     {estado.nome}
                   </h3>
                 </div>
+
+                {/* Subtle Glass Highlight */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/40 dark:via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[2rem]" />
               </Link>
             ))}
           </div>
