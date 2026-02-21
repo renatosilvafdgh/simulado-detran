@@ -306,7 +306,7 @@ export function Home() {
                 é só escolher a categoria e começar a estudar!
               </p>
               <Link to="/simulado">
-                <button className="btn-3d group focus:outline-none w-full max-w-sm mx-auto">
+                <button className="btn-3d btn-3d-light group focus:outline-none w-full max-w-sm mx-auto">
                   <span className="btn-3d-top">
                     Iniciar Simulado Agora
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
