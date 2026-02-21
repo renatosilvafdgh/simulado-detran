@@ -38,7 +38,7 @@ export function Blog() {
     <div className="min-h-screen pt-32 lg:pt-36 pb-12 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-900/50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-4 pb-2">
             Blog do Simulado Brasil
           </h1>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
