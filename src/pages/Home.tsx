@@ -10,8 +10,10 @@ import {
   Star
 } from 'lucide-react';
 
+import { lazy, Suspense } from 'react';
 import { FeatureCard } from '@/components/ui-custom/FeatureCard';
-import { TestimonialCarousel } from '@/components/ui-custom/TestimonialCarousel';
+
+const TestimonialCarousel = lazy(() => import('@/components/ui-custom/TestimonialCarousel').then(m => ({ default: m.TestimonialCarousel })));
 
 export function Home() {
   const estados = [
@@ -322,7 +324,9 @@ export function Home() {
           </div>
 
           <div className="relative">
-            <TestimonialCarousel testimonials={testimonials} />
+            <Suspense fallback={<div className="h-64 flex items-center justify-center text-slate-400">Carregando depoimentos...</div>}>
+              <TestimonialCarousel testimonials={testimonials} />
+            </Suspense>
           </div>
         </div>
       </section>
