@@ -9,9 +9,9 @@ import {
   Smartphone,
   Star
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
 import { FeatureCard } from '@/components/ui-custom/FeatureCard';
-import { TestimonialCard } from '@/components/ui-custom/TestimonialCard';
+import { TestimonialCarousel } from '@/components/ui-custom/TestimonialCarousel';
 
 export function Home() {
   const estados = [
@@ -272,17 +272,8 @@ export function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                name={testimonial.name}
-                role={testimonial.role}
-                content={testimonial.content}
-                rating={testimonial.rating}
-                avatar={testimonial.avatar}
-              />
-            ))}
+          <div className="mt-8 relative">
+            <TestimonialCarousel testimonials={testimonials} />
           </div>
         </div>
       </section>
