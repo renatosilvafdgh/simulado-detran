@@ -252,3 +252,5 @@ export function Contato() {
     </div>
   );
 }
+
+// Configuração de produção validada. 🏁
