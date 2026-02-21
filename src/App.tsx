@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Home } from '@/pages/Home';
@@ -12,27 +12,35 @@ import { AuthProvider } from '@/contexts/AuthContext';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import './App.css';
 
-function App() {
+function AppContent() {
   const { theme, toggleTheme } = useTheme();
+  const location = useLocation();
+  const isSimuladoExecution = location.pathname.includes('/simulado/executar');
 
+  return (
+    <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300 overflow-x-hidden flex flex-col">
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/simulado" element={<Simulado />} />
+          <Route path="/simulado/executar/:id" element={<SimuladoExecution />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/contato" element={<Contato />} />
+        </Routes>
+      </main>
+      {!isSimuladoExecution && <Footer />}
+    </div>
+  );
+}
+
+function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <ScrollToTop />
-        <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
-          <Navbar theme={theme} toggleTheme={toggleTheme} />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/simulado" element={<Simulado />} />
-              <Route path="/simulado/executar/:id" element={<SimuladoExecution />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/contato" element={<Contato />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        <AppContent />
       </BrowserRouter>
     </AuthProvider>
   );
