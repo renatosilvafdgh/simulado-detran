@@ -2,14 +2,11 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { getBlogPostBySlug } from '@/services/blog.service';
+import { getBlogPostBySlug, type BlogPost } from '@/services/blog.service';
 import { formatDate } from '@/lib/utils';
 import { Calendar, User, ArrowLeft, Loader2, Clock, Share } from 'lucide-react';
-import type { Database } from '@/types/database.types';
 import { Button } from '@/components/ui/button';
 import '@/styles/markdown.css';
-
-type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
 
 export function BlogPost() {
     const { slug } = useParams<{ slug: string }>();

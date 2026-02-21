@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getBlogPosts } from '@/services/blog.service';
+import { getBlogPosts, type BlogPost } from '@/services/blog.service';
 import { formatDate } from '@/lib/utils';
 import { Calendar, User, ArrowRight } from 'lucide-react';
-import type { Database } from '@/types/database.types';
-
-type BlogPost = Database['public']['Tables']['blog_posts']['Row'];
 
 export function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([]);
