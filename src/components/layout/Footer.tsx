@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="bg-slate-900 text-slate-300">
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link to="/" className="flex items-center gap-2 mb-4">
@@ -58,38 +58,6 @@ export function Footer() {
               <li>
                 <Link to="/contato" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
                   Contato
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Categories */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Categorias</h3>
-            <ul className="space-y-3">
-              <li>
-                <Link to="/simulado?cat=A" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
-                  Categoria A - Motos
-                </Link>
-              </li>
-              <li>
-                <Link to="/simulado?cat=B" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
-                  Categoria B - Carros
-                </Link>
-              </li>
-              <li>
-                <Link to="/simulado?cat=C" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
-                  Categoria C - Caminhões
-                </Link>
-              </li>
-              <li>
-                <Link to="/simulado?cat=D" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
-                  Categoria D - Ônibus
-                </Link>
-              </li>
-              <li>
-                <Link to="/simulado?cat=E" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
-                  Categoria E - Reboques
                 </Link>
               </li>
             </ul>
