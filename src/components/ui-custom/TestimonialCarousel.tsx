@@ -143,12 +143,14 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
                     <button
                         key={idx}
                         onClick={() => setIndex(idx)}
-                        className={`transition-all duration-300 rounded-full ${idx === currentIndex
-                            ? 'w-8 h-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 shadow-sm'
-                            : 'w-2.5 h-2.5 bg-slate-300 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500'
-                            }`}
+                        className="group flex items-center justify-center p-2 min-w-[44px] min-h-[44px] focus:outline-none"
                         aria-label={`Ir para página de depoimentos ${idx + 1}`}
-                    />
+                    >
+                        <span className={`transition-all duration-300 rounded-full ${idx === currentIndex
+                            ? 'w-8 h-2.5 bg-gradient-to-r from-emerald-500 to-teal-500 shadow-sm'
+                            : 'w-2.5 h-2.5 bg-slate-300 group-hover:bg-slate-400 dark:bg-slate-600 dark:group-hover:bg-slate-500'
+                            }`} />
+                    </button>
                 ))}
             </div>
         </div>
