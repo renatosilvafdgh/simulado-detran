@@ -56,13 +56,13 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <Link to="/sobre-nos" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
-                  Sobre Nós
+                <Link to="/contato" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
+                  Contato
                 </Link>
               </li>
               <li>
-                <Link to="/contato" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
-                  Contato
+                <Link to="/sobre-nos" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
+                  Sobre Nós
                 </Link>
               </li>
             </ul>
