@@ -126,8 +126,9 @@ export function Simulado() {
               return (
                 <div
                   key={opcao.tipo}
-                  className="relative group bg-white dark:bg-slate-800 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(16,185,129,0.12)] border border-slate-100 hover:border-emerald-500/30 dark:border-slate-700/60 dark:hover:border-emerald-500/40 p-6 sm:py-7 sm:px-8 hover:-translate-y-1.5 transition-all duration-500 flex flex-col items-center text-center overflow-hidden"
+                  className="relative group bg-gradient-to-br from-white/90 to-emerald-50/50 dark:from-slate-800/90 dark:to-emerald-900/10 backdrop-blur-xl rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.06)] hover:shadow-[0_12px_40px_rgb(20,184,166,0.15)] border border-emerald-100/80 hover:border-emerald-400/50 dark:border-emerald-800/30 dark:hover:border-emerald-500/40 p-6 sm:py-7 sm:px-8 hover:-translate-y-1.5 transition-all duration-500 flex flex-col items-center text-center overflow-hidden"
                 >
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 dark:via-emerald-400/20 to-transparent"></div>
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-500">
                     <Icon className="h-8 w-8 text-white" />
                   </div>
