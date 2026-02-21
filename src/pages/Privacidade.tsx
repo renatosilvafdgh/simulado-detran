@@ -1,4 +1,4 @@
-import { Shield, CheckCircle, Database, Globe, RefreshCw, Mail, Lock } from 'lucide-react';
+import { Shield, CheckCircle, Database, Globe, Mail } from 'lucide-react';
 
 export function Privacidade() {
     return (
