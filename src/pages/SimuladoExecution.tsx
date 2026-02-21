@@ -351,7 +351,7 @@ export function SimuladoExecution() {
 
                                     let containerClass = "group relative flex cursor-pointer rounded-lg border bg-white dark:bg-slate-800 transition-all overflow-hidden shadow-sm active:scale-[0.99] touch-manipulation ";
                                     let letterBoxClass = "flex items-center justify-center w-10 sm:w-12 font-bold text-sm border-r transition-colors ";
-                                    let contentBoxClass = "p-3 sm:p-4 flex-1 text-sm font-medium leading-normal flex items-center ";
+                                    let contentBoxClass = "py-2 px-3 sm:py-3 sm:px-4 flex-1 text-sm font-medium leading-normal flex items-center ";
                                     let icon = null;
 
                                     if (showFeedback) {
