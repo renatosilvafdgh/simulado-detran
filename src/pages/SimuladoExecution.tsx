@@ -337,8 +337,8 @@ export function SimuladoExecution() {
                         {/* Removed Status Bar - Information moved to Navigation Sidebar */}
 
                         {/* Question Box */}
-                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-5 sm:p-6 flex-grow mb-4">
-                            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug mb-5">
+                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 flex-grow mb-4">
+                            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug mb-3">
                                 {currentQuestion.question}
                             </h2>
 
