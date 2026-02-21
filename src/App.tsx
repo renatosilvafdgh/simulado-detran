@@ -8,6 +8,7 @@ import { Blog } from '@/pages/Blog';
 import { BlogPost } from '@/pages/BlogPost';
 import { Contato } from '@/pages/Contato';
 import { Termos } from '@/pages/Termos';
+import { Privacidade } from '@/pages/Privacidade';
 import { useTheme } from '@/hooks/useTheme';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ScrollToTop } from '@/components/ScrollToTop';
@@ -30,6 +31,7 @@ function AppContent() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contato" element={<Contato />} />
           <Route path="/termos" element={<Termos />} />
+          <Route path="/privacidade" element={<Privacidade />} />
         </Routes>
       </main>
       {!isSimuladoExecution && <Footer />}

@@ -125,9 +125,9 @@ export function Footer() {
               <Link to="/termos" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
                 Termos de Uso
               </Link>
-              <a href="#" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
+              <Link to="/privacidade" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
                 Política de Privacidade
-              </a>
+              </Link>
             </div>
           </div>
         </div>
