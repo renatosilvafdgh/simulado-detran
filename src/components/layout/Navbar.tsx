@@ -45,7 +45,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
             <img
               src="/logo.png"
               alt="Simulado Brasil Logo"
-              className="h-28 lg:h-36 w-auto drop-shadow-sm -my-6 lg:-my-8"
+              className="h-20 lg:h-28 w-auto drop-shadow-sm -my-2 lg:-my-4"
             />
           </Link>
 
