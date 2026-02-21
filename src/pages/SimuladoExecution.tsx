@@ -319,8 +319,6 @@ export function SimuladoExecution() {
     }
 
     const currentQuestion = questions[currentQuestionIndex];
-    // Timer total time calculation
-    const totalTimeSeconds = questions.length === 10 ? 15 * 60 : 30 * 60; // 15min for 10q, 30min for 20q
 
     // Get alternatives as array
     const alternatives = [
@@ -336,38 +334,7 @@ export function SimuladoExecution() {
                 <div className="flex flex-col lg:flex-row gap-6">
                     {/* Main Content - Left Side */}
                     <div className="flex-1 flex flex-col w-full">
-                        {/* Status Bar */}
-                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 mb-4">
-                            <div className="flex justify-between items-end mb-3">
-                                <div className="flex items-center gap-3">
-                                    <div className="h-10 w-10 flex items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
-                                        <Clock className="h-5 w-5" />
-                                    </div>
-                                    <div>
-                                        <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-0.5">Tempo Restante</div>
-                                        <div className="text-lg font-bold font-mono text-slate-800 dark:text-white leading-none">
-                                            {formatTime(timeElapsed)} <span className="text-slate-400 text-sm font-normal">/ {formatTime(totalTimeSeconds)}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-0.5">Progresso</div>
-                                    <div className="text-sm font-bold text-slate-800 dark:text-white leading-none">
-                                        {currentQuestionIndex + 1} DE {questions.length}
-                                    </div>
-                                </div>
-                            </div>
-                            {/* Progress Dashes */}
-                            <div className="flex items-center gap-1 w-full">
-                                {questions.map((_, idx) => {
-                                    let dashClass = "h-1.5 flex-1 rounded-full ";
-                                    if (idx < currentQuestionIndex) dashClass += "bg-emerald-500";
-                                    else if (idx === currentQuestionIndex) dashClass += "bg-blue-500 ring-1 ring-blue-200 dark:ring-blue-900";
-                                    else dashClass += "bg-slate-200 dark:bg-slate-700";
-                                    return <div key={idx} className={dashClass}></div>;
-                                })}
-                            </div>
-                        </div>
+                        {/* Removed Status Bar - Information moved to Navigation Sidebar */}
 
                         {/* Question Box */}
                         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-5 sm:p-6 flex-grow mb-4">
@@ -499,8 +466,27 @@ export function SimuladoExecution() {
 
                     {/* Sidebar - Right Side (Desktop only usually, but matches image) */}
                     <div className="w-full lg:w-80 flex flex-col gap-4">
-                        {/* Navigation Grid */}
+                        {/* Status & Navigation Grid */}
                         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 sm:p-5">
+                            {/* Status Section Moved Here */}
+                            <div className="flex justify-between items-center mb-4 pb-4 border-b border-slate-100 dark:border-slate-700">
+                                <div className="flex flex-col">
+                                    <div className="flex items-center gap-1.5 text-slate-500 mb-1">
+                                        <Clock className="h-3.5 w-3.5" />
+                                        <span className="text-[10px] font-bold uppercase tracking-widest">Tempo</span>
+                                    </div>
+                                    <div className="text-lg font-bold font-mono text-slate-800 dark:text-white leading-none">
+                                        {formatTime(timeElapsed)}
+                                    </div>
+                                </div>
+                                <div className="text-right flex flex-col items-end">
+                                    <div className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Questão</div>
+                                    <div className="text-lg font-bold text-slate-800 dark:text-white leading-none">
+                                        {currentQuestionIndex + 1} <span className="text-sm font-normal text-slate-400">/ {questions.length}</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-3">Navegação</h3>
                             <div className="flex lg:grid gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 hide-scrollbar" style={{ gridTemplateColumns: 'repeat(5, minmax(0, 1fr))' }}>
                                 {questions.map((_, idx) => {
@@ -551,25 +537,6 @@ export function SimuladoExecution() {
                                     <div className="w-2 h-2 rounded-full bg-slate-300 dark:bg-slate-600"></div>
                                     <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Falta</span>
                                 </div>
-                            </div>
-                        </div>
-
-                        {/* Tips Card */}
-                        <div className="bg-emerald-500 rounded-2xl shadow-md p-6 text-white relative overflow-hidden hidden lg:block">
-                            <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-                            <div className="relative z-10">
-                                <div className="flex items-center gap-2 mb-3">
-                                    <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center">
-                                        <svg className="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18h6" /><path d="M10 22h4" /><path d="M12 2v1" /><path d="M12 7v1" /><path d="M15.5 4.5l-.5.5" /><path d="M15.5 9.5l-.5-.5" /><path d="M8.5 4.5l.5.5" /><path d="M8.5 9.5l.5-.5" /><path d="M12 11a4 4 0 1 0 0 8H9a4 4 0 0 1-4-4 4 4 0 0 1 4-4h3z" /></svg>
-                                    </div>
-                                    <h3 className="font-bold">Dica Rápida</h3>
-                                </div>
-                                <p className="text-emerald-50 text-sm leading-relaxed mb-4">
-                                    Leia a questão com atenção. Em caso de dúvida, elimine as alternativas absurdas primeiro.
-                                </p>
-                                <button onClick={() => navigate('/blog')} className="px-4 py-2 rounded-lg bg-white/20 hover:bg-white/30 transition-colors text-xs font-bold uppercase tracking-wider">
-                                    Ver todas as dicas
-                                </button>
                             </div>
                         </div>
                     </div>
