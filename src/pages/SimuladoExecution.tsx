@@ -429,12 +429,12 @@ export function SimuladoExecution() {
                                                 <div className={letterBoxClass}>
                                                     {letter}
                                                 </div>
-                                                <div className={contentBoxClass}>
+                                                <div className={`${contentBoxClass} ${alternative.startsWith('http') ? '!p-1 flex justify-center' : ''}`}>
                                                     {alternative.startsWith('http') ? (
                                                         <img
                                                             src={alternative}
                                                             alt={`Opção ${letter}`}
-                                                            className="h-14 object-contain max-w-full"
+                                                            className="h-20 sm:h-24 object-contain max-w-full rounded-md"
                                                         />
                                                     ) : (
                                                         alternative
