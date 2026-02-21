@@ -104,7 +104,7 @@ export function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-white dark:bg-[#0B1120]">
+      <section className="relative pt-24 pb-10 lg:pt-32 lg:pb-16 overflow-hidden bg-white dark:bg-[#0B1120]">
 
         {/* Premium Background: Subtle Grid Only (No Colored Blobs) */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
@@ -182,7 +182,7 @@ export function Home() {
       </section>
 
       {/* States Section */}
-      <section className="py-20 lg:py-32 relative overflow-hidden bg-slate-50 dark:bg-slate-900/50">
+      <section className="py-10 lg:py-16 relative overflow-hidden bg-slate-50 dark:bg-slate-900/50">
         <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12 z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -234,7 +234,7 @@ export function Home() {
 
 
       {/* Features Section */}
-      <section className="py-20 lg:py-32">
+      <section className="py-10 lg:py-16">
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -260,7 +260,7 @@ export function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900/50">
+      <section className="py-10 lg:py-16 bg-slate-50 dark:bg-slate-900/50">
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
@@ -288,7 +288,7 @@ export function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 lg:py-32">
+      <section className="py-10 lg:py-16">
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="relative bg-gradient-to-r from-emerald-500 to-teal-600 rounded-3xl p-8 lg:p-16 text-center overflow-hidden max-w-4xl mx-auto">
             {/* Decorative */}
