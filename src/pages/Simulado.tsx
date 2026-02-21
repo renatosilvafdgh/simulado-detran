@@ -157,7 +157,7 @@ export function Simulado() {
                   <button
                     onClick={() => iniciarSimulado(opcao.tipo, opcao.questoes)}
                     disabled={generatingSimulado !== null}
-                    className="btn-3d disabled:opacity-50 disabled:cursor-not-allowed group focus:outline-none"
+                    className="btn-3d disabled:opacity-50 disabled:cursor-not-allowed group/btn focus:outline-none"
                   >
                     <span className="btn-3d-top">
                       {generatingSimulado === opcao.tipo ? (
@@ -168,7 +168,7 @@ export function Simulado() {
                       ) : (
                         <>
                           Iniciar Agora
-                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                          <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover/btn:translate-x-1" />
                         </>
                       )}
                     </span>
