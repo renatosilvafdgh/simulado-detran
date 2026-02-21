@@ -27,7 +27,7 @@ export function Simulado() {
 
   const { user, loading: authLoading } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [generatingSimulado, setGeneratingSimulado] = useState(false);
+  const [generatingSimulado, setGeneratingSimulado] = useState<'RAPIDO' | 'COMPLETO' | null>(null);
 
   const opcoesSimulado: SimuladoOption[] = [
     {
@@ -48,8 +48,8 @@ export function Simulado() {
     }
   ];
 
-  const iniciarSimulado = async (_tipo: 'RAPIDO' | 'COMPLETO', quantidade: number) => {
-    setGeneratingSimulado(true);
+  const iniciarSimulado = async (tipo: 'RAPIDO' | 'COMPLETO', quantidade: number) => {
+    setGeneratingSimulado(tipo);
 
     try {
       // Fetch questions from Supabase across all modules using the new distribution logic
@@ -64,7 +64,7 @@ export function Simulado() {
 
       if (questionsError || !questions || questions.length === 0) {
         alert('Não há questões disponíveis. Por favor, adicione questões no banco de dados.');
-        setGeneratingSimulado(false);
+        setGeneratingSimulado(null);
         return;
       }
 
@@ -78,7 +78,7 @@ export function Simulado() {
       if (simuladoError || !simulado) {
         console.error('Detalhes do erro:', simuladoError);
         alert(`Erro ao criar simulado: ${simuladoError?.message || JSON.stringify(simuladoError) || 'Erro desconhecido'}`);
-        setGeneratingSimulado(false);
+        setGeneratingSimulado(null);
         return;
       }
 
@@ -88,7 +88,7 @@ export function Simulado() {
       console.error('Erro ao iniciar simulado:', err);
       alert('Erro ao iniciar simulado. Verifique sua conexão.');
     } finally {
-      setGeneratingSimulado(false);
+      setGeneratingSimulado(null);
     }
   };
 
@@ -148,11 +148,11 @@ export function Simulado() {
 
                   <button
                     onClick={() => iniciarSimulado(opcao.tipo, opcao.questoes)}
-                    disabled={generatingSimulado}
+                    disabled={generatingSimulado !== null}
                     className="btn-3d disabled:opacity-50 disabled:cursor-not-allowed group focus:outline-none"
                   >
                     <span className="btn-3d-top">
-                      {generatingSimulado ? (
+                      {generatingSimulado === opcao.tipo ? (
                         <>
                           <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                           Gerando...
