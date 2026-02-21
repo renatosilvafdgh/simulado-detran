@@ -121,10 +121,10 @@ export function Simulado() {
               return (
                 <div
                   key={opcao.tipo}
-                  className="bg-white dark:bg-slate-800 rounded-2xl shadow-lg border border-slate-100 dark:border-slate-700 p-6 hover:shadow-xl transition-shadow flex flex-col items-center text-center"
+                  className="bg-white dark:bg-slate-800 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border-2 border-slate-100 hover:border-emerald-100 dark:border-slate-700 dark:hover:border-emerald-900/50 p-8 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center"
                 >
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-6 shadow-md">
-                    <Icon className="h-8 w-8 text-white" />
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/30">
+                    <Icon className="h-10 w-10 text-white" />
                   </div>
 
                   <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
