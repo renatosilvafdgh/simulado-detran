@@ -10,20 +10,10 @@ import {
   Star
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { CategoryCard } from '@/components/ui-custom/CategoryCard';
 import { FeatureCard } from '@/components/ui-custom/FeatureCard';
 import { TestimonialCard } from '@/components/ui-custom/TestimonialCard';
-import { categoriasInfo } from '@/data/questoes';
 
 export function Home() {
-  const categorias = [
-    { key: 'A', ...categoriasInfo.A, gradient: 'from-orange-500 to-red-500' },
-    { key: 'B', ...categoriasInfo.B, gradient: 'from-blue-500 to-cyan-500' },
-    { key: 'C', ...categoriasInfo.C, gradient: 'from-green-500 to-emerald-500' },
-    { key: 'D', ...categoriasInfo.D, gradient: 'from-purple-500 to-violet-500' },
-    { key: 'E', ...categoriasInfo.E, gradient: 'from-pink-500 to-rose-500' },
-  ];
-
   const estados = [
     { sigla: 'AC', nome: 'Acre' },
     { sigla: 'AL', nome: 'Alagoas' },
@@ -240,35 +230,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900/50">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
-              Escolha sua categoria
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Simulados específicos para cada categoria de habilitação.
-              Pratique com questões adequadas ao seu tipo de veículo.
-            </p>
-          </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-6xl mx-auto">
-            {categorias.map((cat) => (
-              <CategoryCard
-                key={cat.key}
-                categoria={cat.key as 'A' | 'B' | 'C' | 'D' | 'E'}
-                nome={cat.nome}
-                descricao={cat.descricao}
-                questoes={cat.questoes}
-                tempo={cat.tempo}
-                aprovacao={cat.aprovacao}
-                gradient={cat.gradient}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Features Section */}
       <section className="py-20 lg:py-32">

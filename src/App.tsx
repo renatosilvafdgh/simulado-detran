@@ -9,6 +9,7 @@ import { BlogPost } from '@/pages/BlogPost';
 import { Contato } from '@/pages/Contato';
 import { useTheme } from '@/hooks/useTheme';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { ScrollToTop } from '@/components/ScrollToTop';
 import './App.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
           <Navbar theme={theme} toggleTheme={toggleTheme} />
           <main>
