@@ -233,8 +233,8 @@ html {
 
 /* Outline Variant for 3D Button (White -> Green on hover) */
 .btn-3d-outline .btn-3d-top {
-  color: #065f46;
-  /* text-emerald-800 */
+  color: #0f172a;
+  /* text-slate-900 */
   text-shadow: 0 1px rgba(255, 255, 255, 0.8);
   transition: color 0.15s ease-out;
 }
