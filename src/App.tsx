@@ -9,6 +9,7 @@ import { BlogPost } from '@/pages/BlogPost';
 import { Contato } from '@/pages/Contato';
 import { Termos } from '@/pages/Termos';
 import { Privacidade } from '@/pages/Privacidade';
+import { AvisoLegal } from '@/pages/AvisoLegal';
 import { useTheme } from '@/hooks/useTheme';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ScrollToTop } from '@/components/ScrollToTop';
@@ -32,6 +33,7 @@ function AppContent() {
           <Route path="/contato" element={<Contato />} />
           <Route path="/termos" element={<Termos />} />
           <Route path="/privacidade" element={<Privacidade />} />
+          <Route path="/aviso-legal" element={<AvisoLegal />} />
         </Routes>
       </main>
       {!isSimuladoExecution && <Footer />}
