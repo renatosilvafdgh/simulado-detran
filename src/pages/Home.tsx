@@ -114,36 +114,36 @@ export function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950/30" />
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-emerald-500/5 to-transparent dark:from-emerald-500/10" />
+      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden bg-white dark:bg-[#0B1120]">
 
-        {/* Decorative Elements */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-400/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl" />
+        {/* Premium Background: Subtle Grid Only (No Colored Blobs) */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        {/* Extremely subtle pure light glow at the top center, no green tint */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-slate-100/50 dark:bg-slate-800/30 rounded-full blur-[100px] pointer-events-none mix-blend-normal" />
+
+        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12 z-10">
           <div className="max-w-4xl mx-auto text-center">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 dark:bg-emerald-900/30 rounded-full mb-6">
-              <Star className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-              <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-full mb-8 shadow-sm border border-slate-200 dark:border-slate-700 transition-transform hover:-translate-y-0.5">
+              <Star className="h-4 w-4 text-amber-500" />
+              <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
                 Mais de 50.000 alunos aprovados
               </span>
             </div>
 
             {/* Title */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-[1.1]">
               Passe na prova do{' '}
-              <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-500 relative">
                 Detran
+                <svg className="absolute -bottom-2 w-full max-h-3 text-emerald-300/40 dark:text-emerald-500/30" viewBox="0 0 137 11" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9.5C28.3333 4.5 91.8 -3.1 136 5.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </span>{' '}
               na primeira tentativa
             </h1>
 
             {/* Subtitle */}
-            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
               Simulados gratuitos e ilimitados para prova teórica de habilitação.
               Questões atualizadas, feedback instantâneo e estatísticas de desempenho.
             </p>
@@ -191,12 +191,7 @@ export function Home() {
       </section>
 
       {/* States Section */}
-      <section className="py-20 lg:py-32 relative overflow-hidden">
-        {/* Colorful background blobs to make the glassmorphism pop */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald-400/20 dark:bg-emerald-600/20 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-yellow-400/20 dark:bg-yellow-600/10 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-teal-400/10 dark:bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />
-
+      <section className="py-20 lg:py-32 relative overflow-hidden bg-slate-50 dark:bg-slate-900/50">
         <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12 z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
