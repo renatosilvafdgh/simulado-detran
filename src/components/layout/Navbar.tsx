@@ -41,13 +41,12 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
       <nav className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg group-hover:shadow-emerald-500/25 transition-shadow">
-              <span className="text-white font-bold text-lg">SB</span>
-            </div>
-            <span className="font-bold text-xl hidden sm:block bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-              Simulado Brasil
-            </span>
+          <Link to="/" className="flex items-center gap-2 group transition-transform hover:scale-105">
+            <img
+              src="/logo.png"
+              alt="Simulado Brasil Logo"
+              className="h-10 sm:h-12 w-auto drop-shadow-sm"
+            />
           </Link>
 
           {/* Desktop Navigation */}

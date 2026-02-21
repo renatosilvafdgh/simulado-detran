@@ -10,11 +10,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">SB</span>
-              </div>
-              <span className="font-bold text-xl text-white">Simulado Brasil</span>
+            <Link to="/" className="flex items-center gap-2 mb-4 transition-transform hover:scale-105">
+              <img
+                src="/logo.png"
+                alt="Simulado Brasil Logo"
+                className="h-12 w-auto drop-shadow-sm"
+              />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
               A melhor plataforma de simulados para prova teórica do Detran.
