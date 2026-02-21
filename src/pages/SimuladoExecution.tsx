@@ -328,6 +328,8 @@ export function SimuladoExecution() {
         currentQuestion.alternative_4
     ];
 
+    const allImages = alternatives.every(alt => typeof alt === 'string' && alt.startsWith('http'));
+
     return (
         <div className="min-h-screen pt-20 pb-8 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -342,7 +344,7 @@ export function SimuladoExecution() {
                                 {currentQuestion.question}
                             </h2>
 
-                            <div className="space-y-2">
+                            <div className={allImages ? "grid grid-cols-1 sm:grid-cols-2 gap-3" : "space-y-2"}>
                                 {alternatives.map((alternative, index) => {
                                     const optionNumber = index + 1;
                                     const letter = String.fromCharCode(65 + index); // A, B, C, D
