@@ -126,28 +126,25 @@ export function Simulado() {
               return (
                 <div
                   key={opcao.tipo}
-                  className="relative group bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(16,185,129,0.12)] border border-white/60 hover:border-white/90 dark:border-slate-700/50 dark:hover:border-slate-600/80 p-8 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center overflow-hidden"
+                  className="relative group bg-white dark:bg-slate-800 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(16,185,129,0.12)] border border-slate-100 hover:border-emerald-500/30 dark:border-slate-700/60 dark:hover:border-emerald-500/40 p-6 sm:py-7 sm:px-8 hover:-translate-y-1.5 transition-all duration-500 flex flex-col items-center text-center overflow-hidden"
                 >
-                  {/* Subtle Top Inner Glow for Glass Detail */}
-                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 dark:via-emerald-400/30 to-transparent"></div>
-
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-500">
-                    <Icon className="h-10 w-10 text-white" />
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-4 shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-500">
+                    <Icon className="h-8 w-8 text-white" />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-3">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-white mb-2">
                     {opcao.nome}
                   </h3>
-                  <p className="text-slate-600 dark:text-slate-300 text-base mb-6 px-4">
+                  <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mb-5 px-2">
                     {opcao.descricao}
                   </p>
 
-                  <div className="flex items-center justify-center gap-6 text-sm text-slate-700 dark:text-slate-200 mb-8 bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/30 dark:border-slate-600/30 py-3 px-6 rounded-xl w-full shadow-inner">
-                    <span className="flex items-center gap-2 font-semibold">
+                  <div className="flex items-center justify-center gap-4 sm:gap-6 text-sm text-slate-700 dark:text-slate-300 mb-6 bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700/50 py-2.5 px-4 sm:px-6 rounded-xl w-full">
+                    <span className="flex items-center gap-2 font-medium">
                       <BookOpen className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                       {opcao.questoes} questões
                     </span>
-                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300/80 dark:bg-slate-500/80"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600"></div>
                     <span className="flex items-center gap-2 font-semibold">
                       <Clock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                       {opcao.tempo}
