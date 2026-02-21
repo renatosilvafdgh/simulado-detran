@@ -39,13 +39,13 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
         }`}
     >
       <nav className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="flex items-center justify-between h-20 lg:h-28">
+        <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group transition-transform hover:scale-105">
             <img
               src="/logo.png"
               alt="Simulado Brasil Logo"
-              className="h-20 lg:h-28 w-auto drop-shadow-sm py-1"
+              className="h-28 lg:h-36 w-auto drop-shadow-sm -my-6 lg:-my-8"
             />
           </Link>
 
