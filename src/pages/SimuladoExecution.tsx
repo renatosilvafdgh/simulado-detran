@@ -340,7 +340,7 @@ export function SimuladoExecution() {
 
                         {/* Question Box */}
                         <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-3 sm:p-4 flex-grow mb-4">
-                            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug mb-3">
+                            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug mb-4">
                                 {currentQuestion.question}
                             </h2>
 
@@ -351,9 +351,9 @@ export function SimuladoExecution() {
                                     const isSelected = selectedAnswer === optionNumber;
                                     const isCorrectOption = currentQuestion.correct_index === optionNumber;
 
-                                    let containerClass = "group relative flex cursor-pointer rounded-lg border bg-white dark:bg-slate-800 transition-all overflow-hidden shadow-sm active:scale-[0.99] touch-manipulation ";
-                                    let letterBoxClass = "flex items-center justify-center w-10 sm:w-12 font-bold text-sm border-r transition-colors ";
-                                    let contentBoxClass = "py-2 px-3 sm:py-3 sm:px-4 flex-1 text-sm font-medium leading-normal flex items-center ";
+                                    let containerClass = "group relative flex cursor-pointer rounded-xl border bg-white dark:bg-slate-800 transition-all overflow-hidden shadow-sm active:scale-[0.99] touch-manipulation ";
+                                    let letterBoxClass = "flex items-center justify-center w-12 sm:w-14 font-extrabold text-base sm:text-lg border-r transition-colors ";
+                                    let contentBoxClass = "py-3 px-3 sm:py-4 sm:px-5 flex-1 text-base sm:text-lg font-medium leading-relaxed flex items-center ";
                                     let icon = null;
 
                                     if (showFeedback) {
@@ -426,20 +426,20 @@ export function SimuladoExecution() {
                         </div>
 
                         {/* Navigation Buttons */}
-                        <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="flex flex-row gap-3">
                             <button
                                 onClick={handlePreviousQuestion}
                                 disabled={currentQuestionIndex === 0 || submitting}
-                                className="order-2 sm:order-1 flex-1 sm:flex-none py-3 px-6 rounded-full border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold flex justify-center items-center gap-2 transition-all text-sm active:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex-1 sm:flex-none py-3.5 px-3 sm:px-6 rounded-[1.25rem] sm:rounded-full border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 font-semibold flex justify-center items-center gap-1.5 sm:gap-2 transition-all text-sm sm:text-base active:bg-slate-100 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                <ArrowLeft className="h-5 w-5" />
-                                Anterior
+                                <ArrowLeft className="h-5 w-5 shrink-0" />
+                                <span>Anterior</span>
                             </button>
 
                             <button
                                 onClick={handleAction}
                                 disabled={selectedAnswer === null || submitting}
-                                className="order-1 sm:order-2 flex-1 py-3 px-6 rounded-full bg-blue-500 hover:bg-blue-600 border border-blue-500 text-white font-bold shadow-md flex justify-center items-center gap-2 transition-all active:scale-95 text-sm disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
+                                className="flex-[1.5] sm:flex-1 py-3.5 px-3 sm:px-6 rounded-[1.25rem] sm:rounded-full bg-blue-500 hover:bg-blue-600 border border-blue-500 text-white font-bold shadow-md flex justify-center items-center gap-1.5 sm:gap-2 transition-all active:scale-95 text-base disabled:opacity-50 disabled:cursor-not-allowed ml-auto"
                             >
                                 {submitting ? (
                                     <>
