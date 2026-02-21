@@ -7,6 +7,7 @@ import { SimuladoExecution } from '@/pages/SimuladoExecution';
 import { Blog } from '@/pages/Blog';
 import { BlogPost } from '@/pages/BlogPost';
 import { Contato } from '@/pages/Contato';
+import { Termos } from '@/pages/Termos';
 import { useTheme } from '@/hooks/useTheme';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ScrollToTop } from '@/components/ScrollToTop';
@@ -28,6 +29,7 @@ function AppContent() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contato" element={<Contato />} />
+          <Route path="/termos" element={<Termos />} />
         </Routes>
       </main>
       {!isSimuladoExecution && <Footer />}

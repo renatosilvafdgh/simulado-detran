@@ -122,9 +122,9 @@ export function Footer() {
               © {currentYear} Simulado Brasil. Todos os direitos reservados.
             </p>
             <div className="flex items-center gap-6">
-              <a href="#" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
+              <Link to="/termos" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
                 Termos de Uso
-              </a>
+              </Link>
               <a href="#" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
                 Política de Privacidade
               </a>
