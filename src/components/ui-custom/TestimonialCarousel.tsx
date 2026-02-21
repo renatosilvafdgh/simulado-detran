@@ -138,7 +138,7 @@ export function TestimonialCarousel({ testimonials }: TestimonialCarouselProps) 
             </button>
 
             {/* Dots Indicator */}
-            <div className="flex justify-center flex-wrap gap-2 mt-2 px-12">
+            <div className="hidden sm:flex justify-center flex-wrap gap-2 mt-2 px-12">
                 {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
                     <button
                         key={idx}
