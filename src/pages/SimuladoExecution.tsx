@@ -331,13 +331,13 @@ export function SimuladoExecution() {
     ];
 
     return (
-        <div className="min-h-screen pt-24 pb-16 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
+        <div className="min-h-screen pt-20 pb-8 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col lg:flex-row gap-8">
+                <div className="flex flex-col lg:flex-row gap-6">
                     {/* Main Content - Left Side */}
                     <div className="flex-1 flex flex-col w-full">
                         {/* Status Bar */}
-                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 mb-6">
+                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 mb-4">
                             <div className="flex justify-between items-end mb-3">
                                 <div className="flex items-center gap-3">
                                     <div className="h-10 w-10 flex items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
@@ -370,12 +370,12 @@ export function SimuladoExecution() {
                         </div>
 
                         {/* Question Box */}
-                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6 sm:p-8 flex-grow mb-6">
-                            <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white leading-snug mb-8">
+                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-5 sm:p-6 flex-grow mb-4">
+                            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug mb-5">
                                 {currentQuestion.question}
                             </h2>
 
-                            <div className="space-y-3">
+                            <div className="space-y-2">
                                 {alternatives.map((alternative, index) => {
                                     const optionNumber = index + 1;
                                     const letter = String.fromCharCode(65 + index); // A, B, C, D
@@ -383,8 +383,8 @@ export function SimuladoExecution() {
                                     const isCorrectOption = currentQuestion.correct_index === optionNumber;
 
                                     let containerClass = "group relative flex cursor-pointer rounded-lg border bg-white dark:bg-slate-800 transition-all overflow-hidden shadow-sm active:scale-[0.99] touch-manipulation ";
-                                    let letterBoxClass = "flex items-center justify-center w-12 font-bold text-sm border-r transition-colors ";
-                                    let contentBoxClass = "p-4 flex-1 text-sm font-medium leading-normal flex items-center ";
+                                    let letterBoxClass = "flex items-center justify-center w-10 sm:w-12 font-bold text-sm border-r transition-colors ";
+                                    let contentBoxClass = "p-3 sm:p-4 flex-1 text-sm font-medium leading-normal flex items-center ";
                                     let icon = null;
 
                                     if (showFeedback) {
@@ -434,7 +434,7 @@ export function SimuladoExecution() {
                                                         <img
                                                             src={alternative}
                                                             alt={`Opção ${letter}`}
-                                                            className="h-20 sm:h-24 object-contain max-w-full rounded-md"
+                                                            className="h-16 sm:h-20 object-contain max-w-full rounded-md"
                                                         />
                                                     ) : (
                                                         alternative
@@ -449,7 +449,7 @@ export function SimuladoExecution() {
 
                             {/* Feedback Section (if applicable) */}
                             {showFeedback && currentQuestion.explanation && (
-                                <div className="mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 text-sm text-slate-600 dark:text-slate-300">
+                                <div className="mt-4 p-3 rounded-xl bg-slate-50 dark:bg-slate-700/50 border border-slate-200 dark:border-slate-600 text-sm text-slate-600 dark:text-slate-300">
                                     <span className="font-semibold text-slate-800 dark:text-white block mb-1">Explicação:</span>
                                     {currentQuestion.explanation}
                                 </div>
@@ -498,10 +498,10 @@ export function SimuladoExecution() {
                     </div>
 
                     {/* Sidebar - Right Side (Desktop only usually, but matches image) */}
-                    <div className="w-full lg:w-80 flex flex-col gap-6">
+                    <div className="w-full lg:w-80 flex flex-col gap-4">
                         {/* Navigation Grid */}
-                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-6">
-                            <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-4">Navegação</h3>
+                        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 p-4 sm:p-5">
+                            <h3 className="text-[11px] font-bold text-slate-500 uppercase tracking-widest mb-3">Navegação</h3>
                             <div className="flex lg:grid gap-2 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 hide-scrollbar" style={{ gridTemplateColumns: 'repeat(5, minmax(0, 1fr))' }}>
                                 {questions.map((_, idx) => {
                                     const isCurrent = idx === currentQuestionIndex;
