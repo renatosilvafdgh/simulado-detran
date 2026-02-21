@@ -434,7 +434,7 @@ export function SimuladoExecution() {
                                                         <img
                                                             src={alternative}
                                                             alt={`Opção ${letter}`}
-                                                            className="h-24 object-contain max-w-full"
+                                                            className="h-14 object-contain max-w-full"
                                                         />
                                                     ) : (
                                                         alternative
