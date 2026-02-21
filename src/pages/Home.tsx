@@ -266,7 +266,7 @@ export function Home() {
 
                 {/* Text Section */}
                 <div className="text-center w-full flex flex-col justify-center flex-grow transition-transform duration-500 group-hover:-translate-y-1 relative z-20">
-                  <p className="text-[10px] sm:text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-[0.15em] mb-1 sm:mb-1.5 opacity-80 group-hover:opacity-100 transition-opacity">
+                  <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-[0.15em] mb-1 sm:mb-1.5 opacity-90 group-hover:opacity-100 transition-opacity">
                     Simulado
                   </p>
                   <h3 className="text-sm sm:text-base md:text-lg font-extrabold text-slate-800 dark:text-slate-100 leading-tight">
