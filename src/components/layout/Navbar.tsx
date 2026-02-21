@@ -39,13 +39,13 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
         }`}
     >
       <nav className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-20 lg:h-28">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group transition-transform hover:scale-105">
             <img
               src="/logo.png"
               alt="Simulado Brasil Logo"
-              className="h-10 sm:h-12 w-auto drop-shadow-sm"
+              className="h-20 lg:h-28 w-auto drop-shadow-sm py-1"
             />
           </Link>
 
@@ -55,7 +55,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${isActive(link.path)
+                className={`px-4 py-2 rounded-lg text-base lg:text-lg font-medium transition-all duration-200 ${isActive(link.path)
                   ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400'
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-slate-200'
                   }`}
@@ -83,7 +83,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
 
             {/* CTA Button - Desktop */}
             <Link to="/simulado" className="hidden sm:block">
-              <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg shadow-emerald-500/25">
+              <Button className="text-base lg:text-lg px-6 py-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg shadow-emerald-500/25">
                 Iniciar Simulado
               </Button>
             </Link>
