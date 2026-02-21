@@ -253,7 +253,7 @@ export function Home() {
                 <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.08)] group-hover:shadow-[0_8px_30px_rgb(0,0,0,0.15)] transition-shadow duration-500 border border-white/50 dark:border-slate-700/50 mb-4 sm:mb-5 bg-slate-100 dark:bg-slate-900">
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <img
-                    src={`/flags/${estado.sigla.toLowerCase()}.wpeg`}
+                    src={`/flags/${estado.sigla.toLowerCase()}.webp`}
                     alt={`Bandeira do ${estado.nome}`}
                     className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
                     onError={(e) => {
