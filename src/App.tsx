@@ -11,6 +11,7 @@ import { Termos } from '@/pages/Termos';
 import { Privacidade } from '@/pages/Privacidade';
 import { AvisoLegal } from '@/pages/AvisoLegal';
 import { SobreNos } from '@/pages/SobreNos';
+import { Cookies } from '@/pages/Cookies';
 import { useTheme } from '@/hooks/useTheme';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { ScrollToTop } from '@/components/ScrollToTop';
@@ -36,6 +37,7 @@ function AppContent() {
           <Route path="/privacidade" element={<Privacidade />} />
           <Route path="/aviso-legal" element={<AvisoLegal />} />
           <Route path="/sobre-nos" element={<SobreNos />} />
+          <Route path="/cookies" element={<Cookies />} />
         </Routes>
       </main>
       {!isSimuladoExecution && <Footer />}

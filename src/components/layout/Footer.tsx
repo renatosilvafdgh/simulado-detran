@@ -90,12 +90,15 @@ export function Footer() {
             <p className="text-slate-500 text-sm text-center md:text-left">
               © {currentYear} Simulado Brasil. Todos os direitos reservados.
             </p>
-            <div className="flex items-center gap-6">
+            <div className="flex items-center gap-6 flex-wrap justify-center md:justify-start">
               <Link to="/termos" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
                 Termos de Uso
               </Link>
               <Link to="/privacidade" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
                 Política de Privacidade
+              </Link>
+              <Link to="/cookies" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
+                Política de Cookies
               </Link>
               <Link to="/aviso-legal" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
                 Aviso Legal
