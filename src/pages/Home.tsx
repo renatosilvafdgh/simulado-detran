@@ -202,29 +202,30 @@ export function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 max-w-7xl mx-auto">
             {estados.map((estado) => (
               <Link
                 key={estado.sigla}
                 to={`/simulado?estado=${estado.sigla}`}
-                className="group flex flex-col items-center justify-center p-6 bg-[#fecb00] rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-transparent hover:border-amber-200"
+                className="group flex flex-col bg-gradient-to-b from-[#fecb00] to-[#e6b800] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 border border-amber-300/50 hover:border-amber-400 hover:-translate-y-1 overflow-hidden"
               >
-                <div className="w-24 h-16 sm:w-28 sm:h-20 md:w-32 md:h-24 mb-4 overflow-hidden border border-black/10 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                <div className="w-full aspect-[4/3] overflow-hidden bg-slate-100 relative border-b border-amber-300/30">
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors z-10 pointer-events-none" />
                   <img
                     src={`/flags/${estado.sigla.toLowerCase()}.png`}
                     alt={`Bandeira do ${estado.nome}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-center transform transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => {
                       // Fallback visual se a bandeira não existir
-                      (e.target as HTMLImageElement).src = `https://placehold.co/128x96/f8f9fa/6b7280?text=${estado.sigla}`;
+                      (e.target as HTMLImageElement).src = `https://placehold.co/400x300/fecb00/000000?text=${estado.sigla}`;
                     }}
                   />
                 </div>
-                <div className="text-center">
-                  <p className="text-xs sm:text-sm font-medium text-amber-900/80 uppercase tracking-wider mb-1">
+                <div className="p-4 text-center flex-grow flex flex-col justify-center">
+                  <p className="text-[10px] font-bold text-amber-900/60 uppercase tracking-widest mb-1">
                     Simulado Detran
                   </p>
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-tight">
                     {estado.nome}
                   </h3>
                 </div>
