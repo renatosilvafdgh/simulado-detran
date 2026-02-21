@@ -98,6 +98,55 @@ export function Home() {
       content: 'Já tinha reprovado uma vez antes de conhecer o Simulado Brasil. Depois de praticar aqui, passei com 92% de aproveitamento!',
       rating: 5,
       avatar: 'FL'
+    },
+    {
+      name: 'João Pedro',
+      role: 'Aprovado na categoria AB',
+      content: 'A interface é super limpa e não tem propagandas chatas atrapalhando. Estudei pelo celular no ônibus e deu super certo.',
+      rating: 5,
+      avatar: 'JP'
+    },
+    {
+      name: 'Beatriz Costa',
+      role: 'Aprovada na categoria B',
+      content: 'As explicações de cada questão são o diferencial. Não é só decorar a resposta, você realmente entende a regra de trânsito.',
+      rating: 5,
+      avatar: 'BC'
+    },
+    {
+      name: 'Roberto Alves',
+      role: 'Aprovado na categoria D',
+      content: 'Fui fazer adição de categoria e o simulado específico para caminhão e ônibus foi fundamental para a minha aprovação rápida.',
+      rating: 5,
+      avatar: 'RA'
+    },
+    {
+      name: 'Camila Santos',
+      role: 'Aprovada na categoria A',
+      content: 'Muito prático! O fato de não precisar criar conta para começar a simular me ganhou no primeiro acesso. Recomendo para todos.',
+      rating: 4,
+      avatar: 'CS'
+    },
+    {
+      name: 'Lucas Mendes',
+      role: 'Aprovado na categoria B',
+      content: 'As questões de mecânica e primeiros socorros me davam muito medo, mas com a repetição dos simulados eu fixei o conteúdo.',
+      rating: 5,
+      avatar: 'LM'
+    },
+    {
+      name: 'Juliana Rocha',
+      role: 'Aprovada na categoria B',
+      content: 'Estudar pelos livros da autoescola estava me dando sono. O formato de simulado digital com feedback na hora mudou tudo.',
+      rating: 5,
+      avatar: 'JR'
+    },
+    {
+      name: 'Marcos Vinícius',
+      role: 'Aprovado na categoria C',
+      content: 'Sensacional. A contagem de tempo e o formato da prova me deixaram muito tranquilo no dia do exame oficial. Fui sem ansiedade.',
+      rating: 5,
+      avatar: 'MV'
     }
   ];
 
