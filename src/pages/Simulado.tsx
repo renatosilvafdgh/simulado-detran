@@ -101,7 +101,12 @@ export function Simulado() {
   }
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
+    <div className="min-h-screen pt-24 pb-16 relative overflow-hidden bg-slate-50/50 dark:bg-slate-900/50">
+      {/* Decorative Blob Backgrounds for Glass Effect */}
+      <div className="absolute inset-0 pointer-events-none -z-10">
+        <div className="absolute top-[10%] left-[10%] w-[30rem] h-[30rem] rounded-full bg-emerald-400/20 blur-[120px] mix-blend-multiply dark:mix-blend-screen transition-all duration-1000"></div>
+        <div className="absolute bottom-[20%] right-[10%] w-[25rem] h-[25rem] rounded-full bg-teal-400/20 blur-[100px] mix-blend-multiply dark:mix-blend-screen transition-all duration-1000"></div>
+      </div>
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
         {/* Header */}
         <div className="text-center mb-12">
@@ -121,27 +126,30 @@ export function Simulado() {
               return (
                 <div
                   key={opcao.tipo}
-                  className="bg-white dark:bg-slate-800 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] border-2 border-slate-100 hover:border-emerald-100 dark:border-slate-700 dark:hover:border-emerald-900/50 p-8 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center"
+                  className="relative group bg-white/60 dark:bg-slate-800/60 backdrop-blur-xl rounded-3xl shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(16,185,129,0.12)] border border-white/60 hover:border-white/90 dark:border-slate-700/50 dark:hover:border-slate-600/80 p-8 hover:-translate-y-2 transition-all duration-500 flex flex-col items-center text-center overflow-hidden"
                 >
-                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/30">
+                  {/* Subtle Top Inner Glow for Glass Detail */}
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 dark:via-emerald-400/30 to-transparent"></div>
+
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-6 shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-500">
                     <Icon className="h-10 w-10 text-white" />
                   </div>
 
-                  <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-3">
+                  <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-3">
                     {opcao.nome}
                   </h3>
-                  <p className="text-slate-500 dark:text-slate-400 text-base mb-6 px-4">
+                  <p className="text-slate-600 dark:text-slate-300 text-base mb-6 px-4">
                     {opcao.descricao}
                   </p>
 
-                  <div className="flex items-center justify-center gap-6 text-sm text-slate-600 dark:text-slate-400 mb-8 bg-slate-50 dark:bg-slate-700/50 py-3 px-6 rounded-xl w-full">
-                    <span className="flex items-center gap-2 font-medium">
-                      <BookOpen className="h-4 w-4 text-emerald-500" />
+                  <div className="flex items-center justify-center gap-6 text-sm text-slate-700 dark:text-slate-200 mb-8 bg-white/40 dark:bg-slate-700/40 backdrop-blur-sm border border-white/30 dark:border-slate-600/30 py-3 px-6 rounded-xl w-full shadow-inner">
+                    <span className="flex items-center gap-2 font-semibold">
+                      <BookOpen className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                       {opcao.questoes} questões
                     </span>
-                    <div className="w-1 h-1 rounded-full bg-slate-300 dark:bg-slate-600"></div>
-                    <span className="flex items-center gap-2 font-medium">
-                      <Clock className="h-4 w-4 text-emerald-500" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-slate-300/80 dark:bg-slate-500/80"></div>
+                    <span className="flex items-center gap-2 font-semibold">
+                      <Clock className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
                       {opcao.tempo}
                     </span>
                   </div>
