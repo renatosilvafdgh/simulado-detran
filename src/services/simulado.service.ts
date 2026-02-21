@@ -69,7 +69,8 @@ function getSimuladoSessionId(): string {
  */
 export async function getQuestionsByCategory(
     category: string,
-    totalCount: number = 20
+    totalCount: number = 20,
+    estado?: string
 ): Promise<{ data: Question[] | null; error: any }> {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
     const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -116,51 +117,44 @@ export async function getQuestionsByCategory(
                 .filter(id => id.startsWith(`${modPrefix}-`))
                 .map(id => parseInt(id.split('-')[1]));
 
-            // Fetch from Supabase with random ordering and exclusion
-            let query = (localClient.from(mod.table as any).select('*') as any);
+            // Base query building function
+            const buildQuery = (withEstado: boolean) => {
+                let query = (localClient.from(mod.table as any).select('*') as any);
+                if (withEstado && estado) {
+                    query = query.eq('estado', estado);
+                }
+                if (modUsedIds.length > 0) {
+                    query = query.not('id', 'in', `(${modUsedIds.join(',')})`);
+                }
+                // Fetch extra to shuffle
+                return query.limit(mod.limit + 10);
+            };
 
-            if (modUsedIds.length > 0) {
-                query = query.not('id', 'in', `(${modUsedIds.join(',')})`);
+            // Attempt to fetch with state filter if provided
+            let { data, error } = estado ? await buildQuery(true) : { data: null, error: 'skip' };
+
+            const shouldFallbackState = estado && (error || !data || data.length === 0);
+
+            if (shouldFallbackState || !estado) {
+                // Fetch without state filter (Fallback)
+                const fallbackRes = await buildQuery(false);
+                data = fallbackRes.data;
+                error = fallbackRes.error;
             }
-
-            // ORDER BY RANDOM() is not directly supported in Supabase JS client nicely with .limit()
-            // but we can use a custom RPC or just fetch more and randomize client-side if the table is small.
-            // Requirement says "randomização deve acontecer no banco". 
-            // Since I can't easily add a Postgres function right now, I'll use the .limit() + shuffle for now
-            // or try to use a trick if possible. Actually, .limit() in Supabase doesn't guarantee random.
-            // For true random in DB, we'd need an RPC.
-            // I'll stick to client-side shuffle for selection if I fetch a slightly larger pool, 
-            // but I'll try to honor the "random on banco" by using the best available client method.
-
-            const { data, error } = await query.limit(mod.limit + 10); // Fetch a few more to allow randomization
 
             if (error) {
-                console.warn(`Error fetching ${mod.table}:`, error);
-
+                console.warn(`Error fetching ${mod.table} after state fallback checks:`, error);
                 // Fallback: if exclusion made result set too small, retry without exclusion
                 if (modUsedIds.length > 0) {
-                    const fallbackRes = await (localClient.from(mod.table as any).select('*').limit(mod.limit) as any);
-                    if (fallbackRes.data) {
-                        const mapped = fallbackRes.data.map((q: any) => ({
-                            id: `${modPrefix}-${q.id}`,
-                            question: q.question,
-                            category: category,
-                            subject: q.subject || `Módulo ${modPrefix}`,
-                            alternative_1: q.alternative_1,
-                            alternative_2: q.alternative_2,
-                            alternative_3: q.alternative_3,
-                            alternative_4: q.alternative_4,
-                            correct_index: q.correct_index,
-                            explanation: q.explanation || null,
-                            image_url: q.image_url || null
-                        }));
-                        allQuestions.push(...mapped.sort(() => Math.random() - 0.5).slice(0, mod.limit));
-                    }
+                    let emergencyQ = (localClient.from(mod.table as any).select('*') as any);
+                    const fallbackRes = await emergencyQ.limit(mod.limit);
+                    data = fallbackRes.data;
                 }
-                continue;
+
+                if (!data) continue;
             }
 
-            if (data) {
+            if (data && data.length > 0) {
                 const mapped = data.map((q: any) => ({
                     id: `${modPrefix}-${q.id}`,
                     question: q.question,

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { 
-  ArrowRight, 
-  CheckCircle, 
-  BookOpen, 
+import {
+  ArrowRight,
+  CheckCircle,
+  BookOpen,
   Target,
   Zap,
   Shield,
@@ -22,6 +22,36 @@ export function Home() {
     { key: 'C', ...categoriasInfo.C, gradient: 'from-green-500 to-emerald-500' },
     { key: 'D', ...categoriasInfo.D, gradient: 'from-purple-500 to-violet-500' },
     { key: 'E', ...categoriasInfo.E, gradient: 'from-pink-500 to-rose-500' },
+  ];
+
+  const estados = [
+    { sigla: 'AC', nome: 'Acre' },
+    { sigla: 'AL', nome: 'Alagoas' },
+    { sigla: 'AP', nome: 'Amapá' },
+    { sigla: 'AM', nome: 'Amazonas' },
+    { sigla: 'BA', nome: 'Bahia' },
+    { sigla: 'CE', nome: 'Ceará' },
+    { sigla: 'DF', nome: 'Distrito Federal' },
+    { sigla: 'ES', nome: 'Espírito Santo' },
+    { sigla: 'GO', nome: 'Goiás' },
+    { sigla: 'MA', nome: 'Maranhão' },
+    { sigla: 'MT', nome: 'Mato Grosso' },
+    { sigla: 'MS', nome: 'Mato Grosso do Sul' },
+    { sigla: 'MG', nome: 'Minas Gerais' },
+    { sigla: 'PA', nome: 'Pará' },
+    { sigla: 'PB', nome: 'Paraíba' },
+    { sigla: 'PR', nome: 'Paraná' },
+    { sigla: 'PE', nome: 'Pernambuco' },
+    { sigla: 'PI', nome: 'Piauí' },
+    { sigla: 'RJ', nome: 'Rio de Janeiro' },
+    { sigla: 'RN', nome: 'Rio Grande do Norte' },
+    { sigla: 'RS', nome: 'Rio Grande do Sul' },
+    { sigla: 'RO', nome: 'Rondônia' },
+    { sigla: 'RR', nome: 'Roraima' },
+    { sigla: 'SC', nome: 'Santa Catarina' },
+    { sigla: 'SP', nome: 'São Paulo' },
+    { sigla: 'SE', nome: 'Sergipe' },
+    { sigla: 'TO', nome: 'Tocantins' }
   ];
 
   const features = [
@@ -88,7 +118,7 @@ export function Home() {
         {/* Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-white to-teal-50 dark:from-slate-900 dark:via-slate-900 dark:to-emerald-950/30" />
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-emerald-500/5 to-transparent dark:from-emerald-500/10" />
-        
+
         {/* Decorative Elements */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-400/20 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl" />
@@ -114,15 +144,15 @@ export function Home() {
 
             {/* Subtitle */}
             <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Simulados gratuitos e ilimitados para prova teórica de habilitação. 
+              Simulados gratuitos e ilimitados para prova teórica de habilitação.
               Questões atualizadas, feedback instantâneo e estatísticas de desempenho.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <Link to="/simulado">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-8 py-6 text-lg shadow-xl shadow-emerald-500/25"
                 >
                   Começar Simulado Grátis
@@ -130,8 +160,8 @@ export function Home() {
                 </Button>
               </Link>
               <Link to="/blog">
-                <Button 
-                  variant="outline" 
+                <Button
+                  variant="outline"
                   size="lg"
                   className="px-8 py-6 text-lg"
                 >
@@ -160,6 +190,50 @@ export function Home() {
         </div>
       </section>
 
+      {/* States Section */}
+      <section className="py-20 lg:py-32">
+        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+              Selecione seu Estado
+            </h2>
+            <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+              Clique na bandeira do seu estado para começar
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {estados.map((estado) => (
+              <Link
+                key={estado.sigla}
+                to={`/simulado?estado=${estado.sigla}`}
+                className="group flex flex-col items-center justify-center p-6 bg-[#fecb00] rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-transparent hover:border-amber-200"
+              >
+                <div className="w-24 h-16 sm:w-28 sm:h-20 md:w-32 md:h-24 mb-4 overflow-hidden border border-black/10 shadow-sm transition-transform duration-300 group-hover:scale-105">
+                  <img
+                    src={`/flags/${estado.sigla.toLowerCase()}.png`}
+                    alt={`Bandeira do ${estado.nome}`}
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      // Fallback visual se a bandeira não existir
+                      (e.target as HTMLImageElement).src = `https://placehold.co/128x96/f8f9fa/6b7280?text=${estado.sigla}`;
+                    }}
+                  />
+                </div>
+                <div className="text-center">
+                  <p className="text-xs sm:text-sm font-medium text-amber-900/80 uppercase tracking-wider mb-1">
+                    Simulado Detran
+                  </p>
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                    {estado.nome}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Categories Section */}
       <section className="py-20 lg:py-32 bg-slate-50 dark:bg-slate-900/50">
         <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
@@ -168,7 +242,7 @@ export function Home() {
               Escolha sua categoria
             </h2>
             <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Simulados específicos para cada categoria de habilitação. 
+              Simulados específicos para cada categoria de habilitação.
               Pratique com questões adequadas ao seu tipo de veículo.
             </p>
           </div>
@@ -198,7 +272,7 @@ export function Home() {
               Por que escolher o Simulado Brasil?
             </h2>
             <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Desenvolvido por especialistas em educação para trânsito, 
+              Desenvolvido por especialistas em educação para trânsito,
               nossa plataforma oferece tudo que você precisa para passar na prova.
             </p>
           </div>
@@ -224,7 +298,7 @@ export function Home() {
               O que nossos alunos dizem
             </h2>
             <p className="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              Junte-se a milhares de alunos que já passaram na prova do Detran 
+              Junte-se a milhares de alunos que já passaram na prova do Detran
               com a ajuda do Simulado Brasil.
             </p>
           </div>
@@ -259,12 +333,12 @@ export function Home() {
                 Pronto para passar na prova?
               </h2>
               <p className="text-emerald-100 text-lg mb-8 max-w-2xl mx-auto">
-                Comece agora mesmo seu simulado gratuito. Não precisa cadastrar, 
+                Comece agora mesmo seu simulado gratuito. Não precisa cadastrar,
                 é só escolher a categoria e começar a estudar!
               </p>
               <Link to="/simulado">
-                <Button 
-                  size="lg" 
+                <Button
+                  size="lg"
                   className="bg-white text-emerald-600 hover:bg-emerald-50 px-8 py-6 text-lg font-semibold shadow-xl"
                 >
                   Iniciar Simulado Agora

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   BookOpen,
   Zap,
@@ -23,6 +23,9 @@ interface SimuladoOption {
 
 export function Simulado() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const estadoFromUrl = searchParams.get('estado');
+
   const { user, loading: authLoading } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [generatingSimulado, setGeneratingSimulado] = useState(false);
@@ -53,7 +56,8 @@ export function Simulado() {
       // Fetch questions from Supabase across all modules using the new distribution logic
       const res = await getQuestionsByCategory(
         "Geral", // Category name is ignored in current logic but required parameter
-        quantidade
+        quantidade,
+        estadoFromUrl || undefined
       );
 
       const questions = res.data;
