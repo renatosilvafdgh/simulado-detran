@@ -92,8 +92,8 @@ export function Footer() {
               <Link to="/privacidade" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
                 Política de Privacidade
               </Link>
-              <Link to="/aviso-legal" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm uppercase">
-                Aviso Legal (Disclaimer)
+              <Link to="/aviso-legal" className="text-slate-500 hover:text-emerald-400 transition-colors text-sm">
+                Aviso Legal
               </Link>
             </div>
           </div>
