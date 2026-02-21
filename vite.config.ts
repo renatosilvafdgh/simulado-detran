@@ -20,7 +20,7 @@ function asyncCssPlugin(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [inspectAttr(), react(), asyncCssPlugin()],
   resolve: {
     alias: {
