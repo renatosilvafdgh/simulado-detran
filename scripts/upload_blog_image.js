@@ -22,6 +22,7 @@ async function uploadImage() {
             .from('blog-images')
             .upload(fileName, fileBuffer, {
                 contentType: 'image/jpeg',
+                cacheControl: '31536000',
                 upsert: true // Sobrescrever se já existir
             })
 
@@ -42,6 +43,7 @@ async function uploadImage() {
                     .from('blog-images')
                     .upload(fileName, fileBuffer, {
                         contentType: 'image/jpeg',
+                        cacheControl: '31536000',
                         upsert: true
                     })
 

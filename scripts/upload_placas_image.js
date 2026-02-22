@@ -21,7 +21,7 @@ async function uploadImageAndUpdatePost() {
         .from('blog-images')
         .upload(fileName, imageBuffer, {
             contentType: 'image/jpeg',
-            cacheControl: '3600',
+            cacheControl: '31536000',
             upsert: false
         })
 
