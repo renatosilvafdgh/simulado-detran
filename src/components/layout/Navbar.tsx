@@ -43,8 +43,12 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 group transition-transform hover:scale-105">
             <img
-              src="/logo.png"
+              src="/logo.jpg"
               alt="Simulado Brasil Logo"
+              width="150"
+              height="150"
+              loading="eager"
+              fetchPriority="high"
               className="h-20 lg:h-28 w-auto drop-shadow-sm -my-2 lg:-my-5"
             />
           </Link>

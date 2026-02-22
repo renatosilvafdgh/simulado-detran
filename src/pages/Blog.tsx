@@ -69,10 +69,17 @@ export function Blog() {
                   className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-slate-100 dark:border-slate-700 flex flex-col"
                 >
                   {post.image_url && (
-                    <div className="aspect-video w-full overflow-hidden">
+                    <div className="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-700">
                       <img
-                        src={post.image_url}
+                        src={post.image_url.replace('/object/public/', '/render/image/public/') + '?width=800&quality=80'}
+                        srcSet={`
+                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=400&quality=80 400w,
+                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=800&quality=80 800w,
+                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=1200&quality=80 1200w
+                        `}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         alt={post.title}
+                        loading="lazy"
                         className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                       />
                     </div>

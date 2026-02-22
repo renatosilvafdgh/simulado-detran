@@ -70,8 +70,17 @@ export function BlogPost() {
                     {post.image_url && (
                         <div className="w-full h-64 md:h-96 overflow-hidden relative">
                             <img
-                                src={post.image_url}
+                                src={post.image_url.replace('/object/public/', '/render/image/public/') + '?width=1200&quality=85'}
+                                srcSet={`
+                                  ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=400&quality=85 400w,
+                                  ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=800&quality=85 800w,
+                                  ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=1200&quality=85 1200w,
+                                  ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=1600&quality=85 1600w
+                                `}
+                                sizes="(max-width: 1024px) 100vw, 896px"
                                 alt={post.title}
+                                loading="eager"
+                                fetchPriority="high"
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
