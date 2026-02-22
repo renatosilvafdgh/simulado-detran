@@ -49,7 +49,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
               height="150"
               loading="eager"
               fetchPriority="high"
-              className="h-20 lg:h-28 w-auto drop-shadow-sm -my-2 lg:-my-5"
+              className="h-14 lg:h-16 w-auto drop-shadow-sm"
             />
           </Link>
 
