@@ -80,9 +80,9 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
               aria-label="Alternar tema de cores"
             >
               {theme === 'light' ? (
-                <Moon className="h-5 w-5 text-slate-600" />
+                <Moon className="h-6 w-6 lg:h-5 lg:w-5 text-slate-600" />
               ) : (
-                <Sun className="h-5 w-5 text-slate-400" />
+                <Sun className="h-6 w-6 lg:h-5 lg:w-5 text-slate-400" />
               )}
             </Button>
 
@@ -96,8 +96,8 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon" className="rounded-full" aria-label="Abrir menu de navegação">
-                  <Menu className="h-6 w-6" />
+                <Button variant="ghost" size="icon" className="rounded-full w-12 h-12" aria-label="Abrir menu de navegação">
+                  <Menu className="h-8 w-8" />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-[300px] sm:w-[400px]">
