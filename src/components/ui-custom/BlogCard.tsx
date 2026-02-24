@@ -11,24 +11,24 @@ interface BlogCardProps {
   dataPublicacao: string;
 }
 
-export function BlogCard({ 
-  id, 
-  titulo, 
-  resumo, 
-  imagem, 
-  categoria, 
+export function BlogCard({
+  id,
+  titulo,
+  resumo,
+  imagem,
+  categoria,
   tempoLeitura,
-  dataPublicacao 
+  dataPublicacao
 }: BlogCardProps) {
   return (
     <Link to={`/blog/${id}`}>
       <article className="group bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-slate-100 dark:border-slate-700 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
         {/* Image */}
-        <div className="relative h-48 overflow-hidden">
-          <img 
-            src={imagem} 
+        <div className="relative w-full aspect-[1200/630] overflow-hidden">
+          <img
+            src={imagem}
             alt={titulo}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
           />
           <div className="absolute top-4 left-4">
             <span className="px-3 py-1 bg-emerald-500 text-white text-xs font-medium rounded-full">

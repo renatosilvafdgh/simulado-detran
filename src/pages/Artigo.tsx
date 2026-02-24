@@ -79,15 +79,15 @@ export function Artigo() {
 
           {/* Image */}
           <div className="mb-8">
-            <img 
-              src={artigo.imagem} 
+            <img
+              src={artigo.imagem}
               alt={artigo.titulo}
               className="w-full h-64 lg:h-96 object-cover rounded-2xl"
             />
           </div>
 
           {/* Content */}
-          <div 
+          <div
             className="prose prose-lg dark:prose-invert max-w-none"
             dangerouslySetInnerHTML={{ __html: artigo.conteudo }}
           />
@@ -99,7 +99,7 @@ export function Artigo() {
             </h3>
             <div className="flex flex-wrap gap-2">
               {artigo.tags.map((tag) => (
-                <span 
+                <span
                   key={tag}
                   className="inline-flex items-center gap-1 px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-sm"
                 >

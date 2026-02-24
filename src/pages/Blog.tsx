@@ -69,13 +69,13 @@ export function Blog() {
                   className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden border border-slate-100 dark:border-slate-700 flex flex-col"
                 >
                   {post.image_url && (
-                    <div className="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-700">
+                    <div className="w-full aspect-[1200/630] overflow-hidden">
                       <img
-                        src={post.image_url.replace('/object/public/', '/render/image/public/') + '?width=800&quality=80'}
+                        src={post.image_url.replace('/object/public/', '/render/image/public/') + '?width=1200&quality=95'}
                         srcSet={`
-                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=400&quality=80 400w,
-                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=800&quality=80 800w,
-                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=1200&quality=80 1200w
+                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=400&quality=95 400w,
+                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=800&quality=95 800w,
+                          ${post.image_url.replace('/object/public/', '/render/image/public/')}?width=1200&quality=95 1200w
                         `}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         alt={post.title}

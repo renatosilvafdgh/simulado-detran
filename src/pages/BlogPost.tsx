@@ -68,7 +68,7 @@ export function BlogPost() {
             <div className="min-h-screen pt-24 pb-12 px-4 sm:px-6 lg:px-8 bg-white dark:bg-[#0B1120] relative">
                 <article className="max-w-4xl mx-auto bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
                     {post.image_url && (
-                        <div className="w-full h-64 md:h-96 overflow-hidden relative">
+                        <div className="w-full aspect-[1200/630] overflow-hidden relative bg-slate-100 dark:bg-slate-900">
                             <img
                                 src={post.image_url.replace('/object/public/', '/render/image/public/') + '?width=1200&quality=85'}
                                 srcSet={`
@@ -81,7 +81,7 @@ export function BlogPost() {
                                 alt={post.title}
                                 loading="eager"
                                 fetchPriority="high"
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover object-center"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
                                 <div className="p-8 w-full">
