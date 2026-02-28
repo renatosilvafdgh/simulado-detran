@@ -20,6 +20,7 @@ const Privacidade = lazy(() => import('@/pages/Privacidade').then(m => ({ defaul
 const AvisoLegal = lazy(() => import('@/pages/AvisoLegal').then(m => ({ default: m.AvisoLegal })));
 const SobreNos = lazy(() => import('@/pages/SobreNos').then(m => ({ default: m.SobreNos })));
 const Cookies = lazy(() => import('@/pages/Cookies').then(m => ({ default: m.Cookies })));
+const SimuladoEstado = lazy(() => import('@/pages/SimuladoEstado').then(m => ({ default: m.SimuladoEstado })));
 
 // Loading Fallback Component
 const PageLoader = () => (
@@ -41,6 +42,7 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/simulado" element={<Simulado />} />
+            <Route path="/simulado/:sigla" element={<SimuladoEstado />} />
             <Route path="/simulado/executar/:id" element={<SimuladoExecution />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />

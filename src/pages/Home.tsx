@@ -13,39 +13,11 @@ import {
 import { lazy, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 import { FeatureCard } from '@/components/ui-custom/FeatureCard';
+import { estados } from '@/data/estados';
 
 const TestimonialCarousel = lazy(() => import('@/components/ui-custom/TestimonialCarousel').then(m => ({ default: m.TestimonialCarousel })));
 
 export function Home() {
-  const estados = [
-    { sigla: 'AC', nome: 'Acre' },
-    { sigla: 'AL', nome: 'Alagoas' },
-    { sigla: 'AP', nome: 'Amapá' },
-    { sigla: 'AM', nome: 'Amazonas' },
-    { sigla: 'BA', nome: 'Bahia' },
-    { sigla: 'CE', nome: 'Ceará' },
-    { sigla: 'DF', nome: 'Distrito Federal' },
-    { sigla: 'ES', nome: 'Espírito Santo' },
-    { sigla: 'GO', nome: 'Goiás' },
-    { sigla: 'MA', nome: 'Maranhão' },
-    { sigla: 'MT', nome: 'Mato Grosso' },
-    { sigla: 'MS', nome: 'Mato Grosso do Sul' },
-    { sigla: 'MG', nome: 'Minas Gerais' },
-    { sigla: 'PA', nome: 'Pará' },
-    { sigla: 'PB', nome: 'Paraíba' },
-    { sigla: 'PR', nome: 'Paraná' },
-    { sigla: 'PE', nome: 'Pernambuco' },
-    { sigla: 'PI', nome: 'Piauí' },
-    { sigla: 'RJ', nome: 'Rio de Janeiro' },
-    { sigla: 'RN', nome: 'Rio Grande do Norte' },
-    { sigla: 'RS', nome: 'Rio Grande do Sul' },
-    { sigla: 'RO', nome: 'Rondônia' },
-    { sigla: 'RR', nome: 'Roraima' },
-    { sigla: 'SC', nome: 'Santa Catarina' },
-    { sigla: 'SP', nome: 'São Paulo' },
-    { sigla: 'SE', nome: 'Sergipe' },
-    { sigla: 'TO', nome: 'Tocantins' }
-  ];
 
   const features = [
     {
@@ -257,7 +229,7 @@ export function Home() {
               {estados.map((estado) => (
                 <Link
                   key={estado.sigla}
-                  to={`/simulado?estado=${estado.sigla}`}
+                  to={`/simulado/${estado.sigla.toLowerCase()}`}
                   className="group relative flex flex-col p-4 sm:p-5 rounded-[2rem] transition-all duration-500 hover:-translate-y-2 overflow-hidden bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-slate-800/60"
                 >
                   {/* Flag Image */}
