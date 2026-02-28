@@ -1,4 +1,4 @@
-import React, { AnchorHTMLAttributes } from "react";
+import type { AnchorHTMLAttributes } from "react";
 
 type Props = AnchorHTMLAttributes<HTMLAnchorElement> & {
     label: string;
