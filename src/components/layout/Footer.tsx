@@ -32,7 +32,7 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/simulado" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
+                <Link to="/simulado-detran" className="text-slate-400 hover:text-emerald-400 transition-colors text-sm">
                   Simulado
                 </Link>
               </li>

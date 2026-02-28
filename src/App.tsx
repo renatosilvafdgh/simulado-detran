@@ -32,7 +32,7 @@ const PageLoader = () => (
 function AppContent() {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
-  const isSimuladoExecution = location.pathname.includes('/simulado/executar');
+  const isSimuladoExecution = location.pathname.includes('/simulado-detran/executar');
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300 overflow-x-hidden flex flex-col">
@@ -41,9 +41,9 @@ function AppContent() {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/simulado" element={<Simulado />} />
-            <Route path="/simulado/:sigla" element={<SimuladoEstado />} />
-            <Route path="/simulado/executar/:id" element={<SimuladoExecution />} />
+            <Route path="/simulado-detran" element={<Simulado />} />
+            <Route path="/simulado-detran-:sigla" element={<SimuladoEstado />} />
+            <Route path="/simulado-detran/executar/:id" element={<SimuladoExecution />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contato" element={<Contato />} />

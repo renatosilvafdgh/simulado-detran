@@ -84,7 +84,7 @@ export function Simulado() {
       }
 
       // Navigate to simulado execution page
-      navigate(`/simulado/executar/${simulado.id}`);
+      navigate(`/simulado-detran/executar/${simulado.id}`);
     } catch (err) {
       console.error('Erro ao iniciar simulado:', err);
       alert('Erro ao iniciar simulado. Verifique sua conexão.');

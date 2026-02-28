@@ -172,7 +172,7 @@ export function Home() {
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-                <Link to="/simulado">
+                <Link to="/simulado-detran">
                   <button className="btn-3d group focus:outline-none">
                     <span className="btn-3d-top">
                       Começar Simulado Grátis
@@ -229,7 +229,7 @@ export function Home() {
               {estados.map((estado) => (
                 <Link
                   key={estado.sigla}
-                  to={`/simulado/${estado.sigla.toLowerCase()}`}
+                  to={`/simulado-detran-${estado.sigla.toLowerCase()}`}
                   className="group relative flex flex-col p-4 sm:p-5 rounded-[2rem] transition-all duration-500 hover:-translate-y-2 overflow-hidden bg-white/40 dark:bg-slate-800/40 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/60 dark:hover:bg-slate-800/60"
                 >
                   {/* Flag Image */}
@@ -330,7 +330,7 @@ export function Home() {
                   Comece agora mesmo seu simulado gratuito. Não precisa cadastrar,
                   é só escolher a categoria e começar a estudar!
                 </p>
-                <Link to="/simulado">
+                <Link to="/simulado-detran">
                   <button className="btn-3d btn-3d-light group focus:outline-none w-full max-w-sm mx-auto">
                     <span className="btn-3d-top">
                       Iniciar Simulado Agora

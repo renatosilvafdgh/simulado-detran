@@ -11,7 +11,7 @@ interface NavbarProps {
 
 const navLinks = [
   { path: '/', label: 'Início', icon: Home },
-  { path: '/simulado', label: 'Simulado', icon: GraduationCap },
+  { path: '/simulado-detran', label: 'Simulado', icon: GraduationCap },
   { label: 'Blog', path: '/blog', icon: BookOpen },
   { path: '/contato', label: 'Contato', icon: Mail },
 ];
@@ -87,7 +87,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
             </Button>
 
             {/* CTA Button - Desktop */}
-            <Link to="/simulado" className="hidden sm:block">
+            <Link to="/simulado-detran" className="hidden sm:block">
               <Button className="text-base lg:text-lg px-6 py-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-lg shadow-emerald-500/25">
                 Iniciar Simulado
               </Button>
@@ -129,7 +129,7 @@ export function Navbar({ theme, toggleTheme }: NavbarProps) {
                   </div>
 
                   <div className="mt-auto pt-6 border-t border-slate-200 dark:border-slate-700">
-                    <Link to="/simulado" onClick={() => setIsOpen(false)}>
+                    <Link to="/simulado-detran" onClick={() => setIsOpen(false)}>
                       <Button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white">
                         Iniciar Simulado
                       </Button>
