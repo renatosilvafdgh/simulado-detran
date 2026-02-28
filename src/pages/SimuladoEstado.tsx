@@ -24,8 +24,10 @@ interface SimuladoOption {
 }
 
 export function SimuladoEstado() {
-    const params = useParams();
-    const sigla = params['*'];
+    const { slug } = useParams<{ slug: string }>();
+    const sigla = slug?.startsWith('simulado-detran-')
+        ? slug.replace('simulado-detran-', '')
+        : undefined;
     const navigate = useNavigate();
     const estado = getEstadoBySigla(sigla);
 
@@ -34,10 +36,10 @@ export function SimuladoEstado() {
     const [generatingSimulado, setGeneratingSimulado] = useState<'RAPIDO' | 'COMPLETO' | null>(null);
 
     useEffect(() => {
-        if (!estado && sigla) {
+        if (!estado && slug) {
             navigate('/simulado-detran', { replace: true });
         }
-    }, [estado, sigla, navigate]);
+    }, [estado, slug, navigate]);
 
     const opcoesSimulado: SimuladoOption[] = [
         {

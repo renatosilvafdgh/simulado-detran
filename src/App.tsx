@@ -42,7 +42,6 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/simulado-detran" element={<Simulado />} />
-            <Route path="/simulado-detran-*" element={<SimuladoEstado />} />
             <Route path="/simulado-detran/executar/:id" element={<SimuladoExecution />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
@@ -52,6 +51,7 @@ function AppContent() {
             <Route path="/aviso-legal" element={<AvisoLegal />} />
             <Route path="/sobre-nos" element={<SobreNos />} />
             <Route path="/cookies" element={<Cookies />} />
+            <Route path="/:slug" element={<SimuladoEstado />} />
           </Routes>
         </Suspense>
       </main>
