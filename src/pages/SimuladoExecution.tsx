@@ -52,7 +52,7 @@ export function SimuladoExecution() {
     useEffect(() => {
         async function loadSimulado() {
             if (!id) {
-                navigate('/simulado');
+                navigate('/simulado-detran');
                 return;
             }
 
@@ -66,7 +66,7 @@ export function SimuladoExecution() {
 
                 if (simuladoError || !simuladoData) {
                     alert('Simulado não encontrado');
-                    navigate('/simulado');
+                    navigate('/simulado-detran');
                     return;
                 }
 
@@ -106,7 +106,7 @@ export function SimuladoExecution() {
 
                 if (questionsError || !questionsData || questionsData.length === 0) {
                     alert('Erro ao carregar questões');
-                    navigate('/simulado');
+                    navigate('/simulado-detran');
                     return;
                 }
 
@@ -114,7 +114,7 @@ export function SimuladoExecution() {
             } catch (err) {
                 console.error('Erro ao carregar simulado:', err);
                 alert('Erro ao carregar simulado');
-                navigate('/simulado');
+                navigate('/simulado-detran');
             } finally {
                 setLoading(false);
             }
@@ -297,7 +297,7 @@ export function SimuladoExecution() {
 
                         <div className="flex gap-4 justify-center">
                             <Button
-                                onClick={() => navigate('/simulado')}
+                                onClick={() => navigate('/simulado-detran')}
                                 variant="outline"
                                 className="flex items-center gap-2"
                             >

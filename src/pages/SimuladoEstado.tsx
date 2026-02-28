@@ -24,7 +24,8 @@ interface SimuladoOption {
 }
 
 export function SimuladoEstado() {
-    const { sigla } = useParams<{ sigla: string }>();
+    const params = useParams();
+    const sigla = params['*'];
     const navigate = useNavigate();
     const estado = getEstadoBySigla(sigla);
 
@@ -34,7 +35,7 @@ export function SimuladoEstado() {
 
     useEffect(() => {
         if (!estado && sigla) {
-            navigate('/simulado', { replace: true });
+            navigate('/simulado-detran', { replace: true });
         }
     }, [estado, sigla, navigate]);
 

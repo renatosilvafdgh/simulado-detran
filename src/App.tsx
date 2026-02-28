@@ -42,7 +42,7 @@ function AppContent() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/simulado-detran" element={<Simulado />} />
-            <Route path="/simulado-detran-:sigla" element={<SimuladoEstado />} />
+            <Route path="/simulado-detran-*" element={<SimuladoEstado />} />
             <Route path="/simulado-detran/executar/:id" element={<SimuladoExecution />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
