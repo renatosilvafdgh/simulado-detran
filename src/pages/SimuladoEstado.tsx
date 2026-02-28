@@ -111,79 +111,143 @@ export function SimuladoEstado() {
     const pageTitle = `SIMULADO DETRAN ${estado.nome.toUpperCase()} | Simulado Brasil`;
     const pageDescription = `Faça o simulado oficial do Detran ${estado.nome}. Questões atualizadas para a prova teórica de habilitação no estado de ${estado.nome}.`;
 
-    const rjSchema = sigla?.toUpperCase() === 'RJ' ? JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "O que é o simulado do Detran RJ primeira habilitação?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "O simulado do Detran RJ primeira habilitação é um teste online baseado no formato oficial da prova teórica aplicada no Rio de Janeiro. Ele inclui questões sobre legislação de trânsito, placas, direção defensiva, primeiros socorros, meio ambiente e mecânica básica, ajudando o candidato a se preparar para a prova oficial."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Onde fazer simulado Detran RJ grátis?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Você pode fazer simulado Detran RJ grátis no site Sou Habilitado. O simulado online segue o padrão oficial da prova teórica do Detran RJ, possui correção automática e pode ser realizado quantas vezes o candidato desejar."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "O simulado Detran RJ 2026 está atualizado?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Sim, o simulado Detran RJ 2026 está atualizado conforme as regras atuais da legislação de trânsito e o formato mais recente da prova teórica do Detran RJ, garantindo que o candidato estude com base no padrão vigente."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Como funciona o simulado online Detran RJ?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "O simulado online Detran RJ funciona como a prova oficial: possui 30 questões de múltipla escolha, tempo cronometrado e correção imediata. Ele ajuda o candidato a treinar para a prova teórica do Detran RJ e aumentar as chances de aprovação."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Como é a prova teórica do Detran RJ?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "A prova teórica do Detran RJ contém 30 questões objetivas sobre legislação de trânsito, sinalização, direção defensiva, primeiros socorros, meio ambiente e mecânica básica. Para ser aprovado, o candidato precisa acertar no mínimo 21 questões."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "O Detran RJ simulado prova é parecido com a prova oficial?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "O Detran RJ simulado prova segue o mesmo padrão de formato e nível de dificuldade da prova oficial. Embora as perguntas não sejam idênticas, o estilo das questões é semelhante ao aplicado no exame teórico do Detran RJ."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "O exame psicotécnico Detran RJ reprova muita gente?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "O exame psicotécnico Detran RJ avalia atenção, raciocínio lógico, coordenação motora e equilíbrio emocional. Ele não exige estudo teórico, mas requer concentração e tranquilidade no dia da avaliação."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "Preciso fazer prova na renovação CNH RJ?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Na renovação CNH RJ normalmente não é necessário refazer a prova teórica, salvo em situações específicas determinadas pelo Detran. Caso seja exigida prova, realizar um simulado Detran RJ pode ajudar na revisão do conteúdo."
-                }
+    const baseUrl = 'https://souhabilitado.com';
+    const currentPath = `/simulado-detran-${sigla?.toLowerCase()}`;
+    const url = `${baseUrl}${currentPath}`;
+
+    const schemas = [
+        {
+            "@type": "Organization",
+            "@id": `${baseUrl}/#organization`,
+            "name": "Simulado Brasil",
+            "url": baseUrl,
+            "logo": {
+                "@type": "ImageObject",
+                "url": `${baseUrl}/logo.png`,
+                "width": "600",
+                "height": "160"
             }
-        ]
-    }) : undefined;
+        },
+        {
+            "@type": "WebPage",
+            "@id": `${url}/#webpage`,
+            "url": url,
+            "name": pageTitle,
+            "description": pageDescription,
+            "isPartOf": { "@id": `${baseUrl}/#organization` },
+            "breadcrumb": { "@id": `${url}/#breadcrumb` },
+            "inLanguage": "pt-BR",
+            "areaServed": {
+                "@type": "State",
+                "name": estado.nome,
+                "alternateName": estado.sigla
+            }
+        },
+        {
+            "@type": "BreadcrumbList",
+            "@id": `${url}/#breadcrumb`,
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Início",
+                    "item": baseUrl
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Simulado",
+                    "item": `${baseUrl}/simulado-detran`
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": `Simulado Detran ${estado.nome}`,
+                    "item": url
+                }
+            ]
+        }
+    ];
+
+    if (sigla?.toUpperCase() === 'RJ') {
+        schemas.push({
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "O que é o simulado do Detran RJ primeira habilitação?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "O simulado do Detran RJ primeira habilitação é um teste online baseado no formato oficial da prova teórica aplicada no Rio de Janeiro. Ele inclui questões sobre legislação de trânsito, placas, direção defensiva, primeiros socorros, meio ambiente e mecânica básica, ajudando o candidato a se preparar para a prova oficial."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Onde fazer simulado Detran RJ grátis?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Você pode fazer simulado Detran RJ grátis no site Sou Habilitado. O simulado online segue o padrão oficial da prova teórica do Detran RJ, possui correção automática e pode ser realizado quantas vezes o candidato desejar."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "O simulado Detran RJ 2026 está atualizado?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Sim, o simulado Detran RJ 2026 está atualizado conforme as regras atuais da legislação de trânsito e o formato mais recente da prova teórica do Detran RJ, garantindo que o candidato estude com base no padrão vigente."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Como funciona o simulado online Detran RJ?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "O simulado online Detran RJ funciona como a prova oficial: possui 30 questões de múltipla escolha, tempo cronometrado e correção imediata. Ele ajuda o candidato a treinar para a prova teórica do Detran RJ e aumentar as chances de aprovação."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Como é a prova teórica do Detran RJ?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "A prova teórica do Detran RJ contém 30 questões objetivas sobre legislação de trânsito, sinalização, direção defensiva, primeiros socorros, meio ambiente e mecânica básica. Para ser aprovado, o candidato precisa acertar no mínimo 21 questões."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "O Detran RJ simulado prova é parecido com a prova oficial?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "O Detran RJ simulado prova segue o mesmo padrão de formato e nível de dificuldade da prova oficial. Embora as perguntas não sejam idênticas, o estilo das questões é semelhante ao aplicado no exame teórico do Detran RJ."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "O exame psicotécnico Detran RJ reprova muita gente?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "O exame psicotécnico Detran RJ avalia atenção, raciocínio lógico, coordenação motora e equilíbrio emocional. Ele não exige estudo teórico, mas requer concentração e tranquilidade no dia da avaliação."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Preciso fazer prova na renovação CNH RJ?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Na renovação CNH RJ normalmente não é necessário refazer a prova teórica, salvo em situações específicas determinadas pelo Detran. Caso seja exigida prova, realizar um simulado Detran RJ pode ajudar na revisão do conteúdo."
+                    }
+                }
+            ]
+        } as any);
+    }
+
+    const fullSchema = JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": schemas
+    });
 
     return (
-        <LayoutWrapper title={pageTitle} description={pageDescription} schema={rjSchema}>
+        <LayoutWrapper title={pageTitle} description={pageDescription} schema={fullSchema}>
             <div className="min-h-screen pt-24 pb-16 relative overflow-hidden bg-white dark:bg-[#0B1120]">
                 <div className="absolute inset-0 pointer-events-none -z-10">
                     <div className="absolute top-[10%] left-[10%] w-[30rem] h-[30rem] rounded-full bg-emerald-400/20 blur-[120px] mix-blend-multiply dark:mix-blend-screen transition-all duration-1000"></div>
