@@ -69,7 +69,7 @@ function getSimuladoSessionId(): string {
  */
 export async function getQuestionsByCategory(
     category: string,
-    totalCount: number = 20,
+    totalCount: number = 30,
     estado?: string
 ): Promise<{ data: Question[] | null; error: any }> {
     const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
@@ -205,7 +205,7 @@ export async function getQuestionsByCategory(
  * Maintained for backward compatibility or direct calls
  */
 export async function getQuestionsFromPlacasTable(
-    limit: number = 20
+    limit: number = 30
 ): Promise<{ data: Question[] | null; error: any }> {
     return getQuestionsByCategory('Placas', limit);
 }

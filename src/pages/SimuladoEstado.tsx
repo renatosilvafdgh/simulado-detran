@@ -53,9 +53,9 @@ export function SimuladoEstado() {
         {
             tipo: 'COMPLETO',
             nome: 'Simulado Completo',
-            descricao: '20 questões para treino completo',
-            questoes: 20,
-            tempo: '30 min',
+            descricao: '30 questões para treino completo',
+            questoes: 30,
+            tempo: '45 min',
             icon: BookOpen
         }
     ];
